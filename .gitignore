@@ -1,0 +1,15 @@
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
+*.log
+~$*
+
+# Generated export files
+exports/
+build/
+dist/
+
+# Local editor files
+.vscode/
+.idea/
