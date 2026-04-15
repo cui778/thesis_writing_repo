@@ -17,6 +17,28 @@
 6. 第2章：理论基础与相关研究
 7. 摘要、目录、图表清单、格式整理
 
+## 写作导航入口
+
+每次写作前先打开：
+
+- [章节阅读路线图](notes/chapter_reading_routes.md)
+- [证据地图](notes/evidence_map.md)
+- [小节规划提示词](prompts/plan_one_section.md)
+- [小节写作提示词](prompts/write_one_section.md)
+- [事实审查提示词](prompts/review_one_section.md)
+
+固定顺序：
+
+```text
+先读路线图
+-> 让 AI 规划当前小节
+-> 读取计划中列出的证据
+-> 更新证据地图
+-> 写正文
+-> 审查事实
+-> 提交版本
+```
+
 ## 章节入口
 
 - [第1章 绪论](chapters/ch1_intro.md)
@@ -31,6 +53,7 @@
 每完成一个小节后检查：
 
 - 本节是否只回答一个核心问题？
+- 本节是否先参考了 [章节阅读路线图](notes/chapter_reading_routes.md)？
 - 数据和结论是否已记录到 [证据地图](notes/evidence_map.md)？
 - 是否误用了旧实验口径？
 - 是否把 50 个候选节点定位误写成 128 节点自由定位？
