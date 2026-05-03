@@ -9,6 +9,7 @@
 -> 打开本阅读路线图
 -> 读取全局口径
 -> 读取本章主线 README/closure 文档
+-> 打开 notes/section_experiment_map.md 找到当前小节对应实验
 -> 根据小节目标读取按需证据
 -> 用 prompts/plan_one_section.md 让 AI 先输出小节计划
 -> 用 prompts/write_one_section.md 写正文
@@ -36,6 +37,14 @@ E:\11.16\script2_new\thesis_writing_package\05_TABLE_FIGURE_INDEX.md
 - `05_TABLE_FIGURE_INDEX.md`：确认图表和结果文件索引。
 
 注意：如果其他文档或提示词里出现重复路径 `script2_new\script2_new`，统一修正为 `E:\11.16\script2_new\...`。
+
+此外，真正决定“当前小节该读哪张表、哪份闭环、哪张图”的文件是：
+
+```text
+E:\11.16\thesis_writing_repo\notes\section_experiment_map.md
+```
+
+本路线图负责“章级导航”，`section_experiment_map.md` 负责“小节级实验映射”。
 
 ## 1. 第1章 绪论
 
@@ -256,6 +265,7 @@ E:\11.16\thesis_writing_repo\chapters\ch5_layout_optimization.md
 
 - 本小节属于哪一章？
 - 本章主线文件是否已读？
+- `notes/section_experiment_map.md` 中对应小节的实验条目是否已读？
 - 本小节要用哪些结果表、图或过程记录？
 - 对应证据是否已经写入 `notes/evidence_map.md`？
 - 本小节最容易越界的地方是什么？

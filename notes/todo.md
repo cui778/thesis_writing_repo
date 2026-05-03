@@ -3,6 +3,7 @@
 ## 立即开始
 
 - [ ] 每章正式写作前，先核对 `notes/chapter_reading_routes.md` 是否覆盖本章主线文件和按需证据。
+- [ ] 为正在写的章节补齐 `notes/section_experiment_map.md` 中的小节级实验映射。
 - [ ] 每个小节开写前，先用 `prompts/plan_one_section.md` 生成小节计划。
 - [ ] 按小节计划补齐或更新 `notes/evidence_map.md`。
 - [ ] 核对第4章第4.1节是否符合导师口径。

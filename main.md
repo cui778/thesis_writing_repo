@@ -22,6 +22,7 @@
 每次写作前先打开：
 
 - [章节阅读路线图](notes/chapter_reading_routes.md)
+- [小节级实验映射表](notes/section_experiment_map.md)
 - [证据地图](notes/evidence_map.md)
 - [小节规划提示词](prompts/plan_one_section.md)
 - [小节写作提示词](prompts/write_one_section.md)
@@ -31,6 +32,7 @@
 
 ```text
 先读路线图
+-> 找到当前小节的实验映射
 -> 让 AI 规划当前小节
 -> 读取计划中列出的证据
 -> 更新证据地图
@@ -54,6 +56,7 @@
 
 - 本节是否只回答一个核心问题？
 - 本节是否先参考了 [章节阅读路线图](notes/chapter_reading_routes.md)？
+- 本节是否先参考了 [小节级实验映射表](notes/section_experiment_map.md)？
 - 数据和结论是否已记录到 [证据地图](notes/evidence_map.md)？
 - 是否误用了旧实验口径？
 - 是否把 50 个候选节点定位误写成 128 节点自由定位？

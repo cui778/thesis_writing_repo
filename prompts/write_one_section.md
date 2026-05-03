@@ -5,6 +5,7 @@
 
 请先阅读并严格遵守：
 E:\11.16\thesis_writing_repo\notes\chapter_reading_routes.md
+E:\11.16\thesis_writing_repo\notes\section_experiment_map.md
 E:\11.16\script2_new\thesis_writing_package\00_GLOBAL_THESIS_CONTEXT.md
 E:\11.16\script2_new\thesis_writing_package\04_DO_NOT_USE_AND_TERMINOLOGY.md
 【当前章节上下文文件】
@@ -20,7 +21,7 @@ E:\11.16\script2_new\thesis_writing_package\04_DO_NOT_USE_AND_TERMINOLOGY.md
 1. 使用中文硕士论文风格，表达正式、清晰、客观。
 2. 只写本小节，不跨章节扩写。
 3. 不编造未提供的数据、文件、图或结果。
-4. 使用的文件和证据必须来自 chapter_reading_routes.md 或小节计划中明确列出的材料。
+4. 使用的文件和证据必须来自 chapter_reading_routes.md、section_experiment_map.md 或小节计划中明确列出的材料。
 5. 不使用旧 v2e_dense_ie、旧 MRR>=0.91、script3 旧结果。
 6. 不把 P 类水质污染源定位写成本文已完成任务。
 7. 涉及实验结果时，同时写优势、边界和可能原因。

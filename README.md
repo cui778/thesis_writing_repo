@@ -7,9 +7,10 @@
 1. 每次只写一个小节，不跨章节扩写。
 2. 每个结论必须能追溯到实验表、图、过程记录或写作包。
 3. 每章写作前先读 [章节阅读路线图](notes/chapter_reading_routes.md)，再决定本小节需要哪些材料。
-4. 正文先保证事实准确，再做语言润色。
-5. 不使用旧高分口径、旧矩阵结果或已废弃实验作为正式主结论。
-6. 第3章、第4章、第5章先写，第1章、摘要和结论最后回头写。
+4. 每个小节写作前再读 [小节级实验映射表](notes/section_experiment_map.md)，精准定位当前小节的具体实验。
+5. 正文先保证事实准确，再做语言润色。
+6. 不使用旧高分口径、旧矩阵结果或已废弃实验作为正式主结论。
+7. 第3章、第4章、第5章先写，第1章、摘要和结论最后回头写。
 
 ## 推荐工作流
 
@@ -17,6 +18,7 @@
 选择章节/小节
 -> 打开 notes/chapter_reading_routes.md
 -> 读取全局口径和本章主线文件
+-> 打开 notes/section_experiment_map.md
 -> 用 prompts/plan_one_section.md 让 AI 输出小节计划
 -> 根据计划读取按需证据
 -> 更新 notes/evidence_map.md
@@ -54,6 +56,7 @@ E:\11.16\process_diagnosis_revision_20260321
 main.md                         论文总入口
 chapters/                       各章节正文草稿
 notes/chapter_reading_routes.md 每章写作前的阅读路线图
+notes/section_experiment_map.md 小节级实验映射表
 notes/evidence_map.md           论文结论与数据来源对应表
 notes/writing_log.md            每日写作记录
 notes/todo.md                   后续待办
