@@ -1,0 +1,3 @@
+﻿split,seed,type,n_windows,MRR,Top-1,Top-3,Top-5,source
+scenario,mean,I,1577.0,0.807554148268385,0.686187512925899,0.929848137492062,0.971136571190125,last_run_metrics_ch1_fullgraph_degree_ie420_s*_fix1.json
+scenario,mean,E,1170.0,0.737697539174275,0.58377764252013,0.867583016919797,0.92243887816576,last_run_metrics_ch1_fullgraph_degree_ie420_s*_fix1.json

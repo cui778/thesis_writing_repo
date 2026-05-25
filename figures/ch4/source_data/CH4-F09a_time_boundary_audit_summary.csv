@@ -1,0 +1,7 @@
+﻿metric,value
+scene_defect_recall,0.9841269841269841
+missed_detection_rate,0.015873015873015928
+onset_error_hours_mean,2.2150537634408605
+active_interval_iou_mean,0.7226143463464981
+duration_error_hours_mean,4.473118279569891
+false_alarm_before_start_rate,0.8225806451612904

@@ -1,0 +1,11 @@
+﻿fig_id,category,ppt_slide,thesis_section,title,output_file,source_data,who_handles,status,claim
+F5-D01,data_redraw,Slide 5-6,5.5.2,主协议空间定位表现点图,figures/data_redraw/F5_D01_main_performance_dot_error.png,table_5_2_main_scenario_seed_summary_with_event_topk.csv,Codex,done,学习型布局与任务驱动布局优于 Degree，v2_2 clean 的 Top-1 更高但波动更大
+F5-D02,data_redraw,Slide 5-6 / backup,5.5.2,场景级 MRR 分布,figures/data_redraw/F5_D02_scenario_mrr_distribution_seed42.png,data/ch5_seed42_by_scenario_raw_metrics.csv,Codex,done,均值之外，场景级分布显示不同布局的低性能尾部差异
+F5-D03,data_redraw,Slide 5-7,5.6.2,direct / near / far 分组性能,figures/data_redraw/F5_D03_observability_group_performance_seed42.png,data/ch5_seed42_observability_group_performance.csv,Codex,done,结构可观测性分组可以连接布局结构与定位表现
+F5-D04,data_redraw,Slide 5-7 / backup,5.6.3,hard candidates 场景性能,figures/data_redraw/F5_D04_hard_candidate_performance_seed42.png,data/ch5_seed42_hard_candidate_performance.csv,Codex,done,Degree 下 far 候选形成难点场景，可用于检验学习型布局是否改善尾部
+F5-D05,data_redraw,Slide 5-7,5.6.1,预算变化下可观测性结构,figures/data_redraw/F5_D05_budget_observability_structure.png,table_5_6_budget_observability_summary.csv,Codex,done,预算变化会改变 direct/far 与 mean_hop，但不代表多预算性能结论
+F5-D06,data_redraw,Slide 5-7 / backup,5.6.4,布局节点集合 Jaccard 相似度,figures/data_redraw/F5_D06_layout_jaccard_heatmap.png,table_5_7_layout_jaccard_similarity.csv,Codex,done,学习型布局不是简单复制人工规则布局
+F5-G01,generated_schematic,Slide 5-1,5.2,固定诊断协议下的布局评价闭环,figures/generated_schematic/F5_G01_fixed_protocol_layout_loop.png,chapter protocol,Codex,done,固定数据和诊断协议，只改变监测节点集合 S
+F5-G02,generated_schematic,Slide 5-2,5.4,从人工规则到双层学习型布局,figures/generated_schematic/F5_G02_learning_layout_two_level.png,chapter mainline,Codex,done,v0_2 clean 与 v2_2 clean 分别对应节点级和布局级学习
+F5-S01,screenshot_needed,Slide 5-3 / Slide 5-7,5.3 / 5.6,管网软件或 GIS 中的监测节点布局截图,figures/screenshot_needed/F5_S01_network_layout_screenshot.png,user screenshot from SWMM/GIS/script viewer,User,todo_user,真实管网背景中展示不同布局的监测点位置
+F5-I01,imagegen_prompted,Slide 5-0 cover,chapter opener,第五章概念封面图,figures/imagegen_prompted/F5_I01_ch5_cover_concept.png,prompt in imagegen_prompts.md,Codex imagegen after style confirmation,prompt_ready,监测节点布局优化的主题视觉，不作为实验数据证据

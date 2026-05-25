@@ -3,6 +3,8 @@ Thumbs.db
 *.tmp
 *.bak
 *.log
+__pycache__/
+*.pyc
 ~$*
 
 # Generated export files

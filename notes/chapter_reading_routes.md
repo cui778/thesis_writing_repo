@@ -154,45 +154,56 @@ E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative
 - 不要把水质伴随残差写成 P 类水质污染源定位。
 - 不能声称 SWMM 模型已经实测校准，除非另有实测校准证据；当前更稳妥的表述是检查连通性、仿真稳定性、时间序列完整性和缺陷响应合理性。
 
-## 4. 第4章 固定监测布局下的诊断模型
+## 4. 第4章 面向缺陷定位的时空图诊断模型研究
 
 先读本章主线文件：
 
 ```text
-E:\11.16\script2_new\thesis_writing_package\02_CH4_WRITING_CONTEXT.md
-E:\11.16\script2_new\chapter4_diagnosis_model\docs\CH4_FINAL_EXPERIMENT_CLOSURE_AND_OUTLINE_20260414.md
+E:\11.16\thesis_writing_repo\chapters\ch4_model_diagnosis.md
+E:\11.16\thesis_writing_repo\chapters\ch4_task_metric_definition.md
+E:\11.16\thesis_writing_repo\notes\evidence_map.md
+E:\11.16\thesis_writing_repo\notes\section_experiment_map.md
+E:\11.16\script2_new\scripts\README.md
 ```
 
 按需读取正式结果表：
 
 ```text
-E:\11.16\script2_new\outputs\reports\chapter1_restart_fullgraph_degree_ie420_multiseed.csv
-E:\11.16\script2_new\outputs\reports\chapter1_restart_model_comparison_seed42.csv
-E:\11.16\script2_new\outputs\reports\chapter1_restart_time_dimension_seed42.csv
-E:\11.16\script2_new\outputs\reports\chapter1_restart_nodehold_multiseed.csv
-E:\11.16\script2_new\outputs\reports\chapter4_ie_type_group_metrics.csv
-E:\11.16\script2_new\outputs\reports\chapter1_task_level_results_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_long.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_ie_type_group_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_nodehold_observability_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
 ```
 
 按需读取图件目录：
 
 ```text
-E:\11.16\script2_new\outputs\reports\figures
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval
 ```
 
 写作重点：
 
-- degree N25 固定监测布局。
-- full-graph sparse-observation 输入方式。
+- 连续场景诊断任务链：窗口证据、活跃期定位、空间定位、综合诊断。
+- `V=128`、`S=25`、`C=50`、`D` 四类集合。
+- full-graph sparse-observation 输入协议。
 - `hydraulic_inverse_deepattn` 主模型。
-- scenario split 主结果。
-- 模型对比、时间维度消融、I/E 分类型结果。
-- node_holdout 作为未见缺陷节点压力测试和边界分析。
+- 三个输出头到指标的计算链条。
+- scenario split 主结果和 Event Top-K。
+- 模型对比多 seed。
+- 窗口长度对时间段定位与空间定位的尺度权衡。
+- I/E 分组定位、node_holdout 和可观测性分析。
 
 禁止：
 
 - 不要写成监测点布局优化章节。
 - 不能使用旧 `MRR>=0.91` 结果。
+- 不能使用旧 `dynamic_only` 时间线结果。
+- 不能把 I/E 分组定位分析写成 I/E 自动分类。
+- 不能把 time_pos/trend/always_on 早期探索写成正式主结果。
 - 不能把 node_holdout 写成已经解决未见节点泛化。
 - 不能把 50 个候选节点定位写成 128 节点自由定位。
 
