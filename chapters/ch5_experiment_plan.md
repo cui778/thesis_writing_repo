@@ -1,20 +1,22 @@
-# 第5章实验规划：诊断反馈驱动的监测节点布局优化
+# 第5章实验规划：诊断反馈与表征复用驱动的监测节点布局优化
 
 ## 1. 当前主线
 
-第5章主线收束为“从人工规则选点走向诊断结果反馈指导布点”。本章不再把多个实验版本并列铺开，而是围绕以下递进关系组织：
+第5章主线收束为“从人工规则选点走向诊断信息驱动布点”。本章不再把多个实验版本并列铺开，而是围绕以下递进关系组织：
 
 ```text
 传统拓扑布局
 → 候选可观测性与两阶段平衡布局
-→ 节点级诊断反馈学习
+→ 节点级外部诊断反馈学习
 → 布局级代理驱动搜索
+→ 诊断模型节点表征复用布局
 ```
 
-正式学习型方法采用 clean 双层口径：
+正式学习型方法采用 clean 口径：
 
-- `v0_2 clean`：节点级诊断反馈学习，回答“哪些节点值得被选”。
+- `v0_2 clean`：节点级外部诊断反馈学习，回答“哪些节点值得被选”。
 - `v2_2 clean`：布局级代理驱动搜索，回答“哪些节点组合整体更优”。
+- `embedding-guided clean`：诊断模型节点表征复用，回答“第4章模型内部节点表征能否形成布局先验”。
 
 `Degree`、`Cand-Obs` 和 `Two-stage v1` 保留为人工规则与任务驱动基线。旧 `v2_2`、`v1_1/v1_2/v1_3` 图上下文探索、非 clean 学习版本不进入中期正式答辩主线。
 
@@ -27,6 +29,7 @@
 | 两阶段平衡布局 | `Two-stage v1` | 可解释规则框架 | 兼顾候选覆盖、空间平衡和冗余控制 |
 | 节点级反馈学习 | `v0_2 clean` | clean 学习型方法一 | 学习单个节点的布设价值 |
 | 布局级代理搜索 | `v2_2 clean` | clean 学习型方法二 | 搜索整体更优的节点组合 |
+| 表征复用布局 | `embedding-guided clean` | 内部诊断表征复用方法 | 复用第4章诊断模型节点表征生成布局 |
 | 未见节点压力测试 | `node_holdout` | 边界实验 | 说明分布内提升不等于严格未见节点泛化 |
 | 无重训补充分析 | 表格重建与现有结果整理 | 论文证据补强 | 补齐 Event Top-K、预算结构、direct/near/far 分组性能、hard candidates 性能、Jaccard 和 surrogate |
 
@@ -195,16 +198,17 @@ monitor_nodes_learnable_layout_network_v2_2_clean_generalization_N25.json
 | Jaccard 热力图 | 不同布局选择集合存在差异 | 热力图 | 各布局 monitor nodes | 补充 |
 | hard candidates 分组图 | 整体最优与困难候选保护不完全一致 | hard vs other gap plot | `CH5-P0_hard_candidates_performance_summary.csv` | 正文/补充 |
 | I/E 类型分组图 | 检查布局收益是否依赖缺陷类型 | 双面板点图 | 待补 I/E 分组表 | 补充 |
-| 布局生成稳定性图 | 学习型布局生成过程是否稳定 | Jaccard / 节点频率图 | 待补多布局实例 | 后续 |
+| 布局生成稳定性图 | 学习型布局生成过程是否稳定 | Jaccard / 节点频率图 | `CH5-P2_learning_layout_structure_summary.csv` | 补充 |
 
 ## 5. 中期答辩口径
 
-中期答辩只讲 clean 双层学习型主线：
+中期答辩主线采用 clean 诊断信息驱动口径：
 
 ```text
 Degree / Cand-Obs / Two-stage v1
-→ v0_2 clean：节点级反馈学习
+→ v0_2 clean：节点级外部反馈学习
 → v2_2 clean：布局级代理搜索
+→ embedding-guided clean：诊断模型节点表征复用
 ```
 
 不讲：
@@ -226,7 +230,7 @@ Degree / Cand-Obs / Two-stage v1
 - 每种布局自身的 direct / near / far 重新计算；
 - hard candidates 第二定义；
 - I/E 类型与场景属性分组；
-- 学习型布局生成多 seed 稳定性；
+- 表征复用布局生成多 checkpoint 稳定性；
 - Jaccard 布局相似度；
 - surrogate 可信度分析；
 - 典型布局案例图。
@@ -386,3 +390,232 @@ E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P1_candidate_overlap_ev
 - 可写：`v2_2 clean` 的候选节点重合数并不高于 `Cand-Obs` 和 `Two-stage v1`，但总体 MRR 和 Top-1 更高，说明布局收益不能由候选节点重合数单独解释。
 - 可写：已有 overlap-controlled 探针在相同 `overlap_count=12` 下仍出现性能差异，说明非候选监测点的补点位置和全图结构覆盖会影响诊断性能。
 - 不可写：当前尚未完成 candidate-only 布局的多 seed 正式训练，因此不能声称“candidate-only 一定更差”。本节结论应限定为“候选节点重合数不是充分条件，布局优化不应等同于候选节点重合最大化”。
+
+## 10. P2 表征复用布局三 seed 诊断评价实验
+
+本轮新增并补齐 `embedding-guided clean` 方法，用于检验第4章诊断模型内部节点表征是否能够指导第5章监测点布局。该方法不使用历史布局得分作为监督信号，而是加载已训练诊断模型 checkpoint，提取节点级隐层表示，并在诊断表征空间中用 max-min diversity 选择 25 个监测节点。当前已完成 seed 7、42、123 三组诊断评价；这些 seed 表示第5章诊断评价 seed，不表示布局生成 seed。
+
+执行脚本：
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\scripts\build_embedding_guided_clean_layout.py
+E:\11.16\thesis_writing_repo\figures\ch5\scripts\collect_ch5_embedding_guided_clean_results.py
+```
+
+方法协议：
+
+- encoder checkpoint：`E:\11.16\script2_new\outputs\model_checkpoints\best_model_ch4_timewin_seq24_s42.pth`
+- resolved encoder：`hydraulic_inverse_deepattn`
+- embedding 提取数据：`time_gated_full_ie_v4_formal_conservative420_seed42`
+- embedding 提取范围：scenario split 的 train windows，共 12980 个窗口
+- embedding 矩阵：`128 × 256`
+- 选点规则：L2 归一化节点 embedding 上的 max-min diversity
+- 评价协议：第5章 sparse-observation scenario split，seed 7/42/123，25 epochs
+
+生成布局：
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean\monitor_nodes_embedding_guided_clean_N25.json
+```
+
+写作仓库源数据：
+
+```text
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_layout_structure_seed42.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_selection_trace_seed42.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_evaluation_seed42.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_evaluation_all_seeds.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_seed_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_by_scenario_seed42.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_by_scenario_all_seeds.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_seed42_comparison.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_all_seed_comparison.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_comparison_seed_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_monitor_nodes_embedding_guided_clean_N25.json
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_embedding_guided_clean_README.md
+```
+
+结构结果：
+
+| 方法 | direct | near | far | mean_hop | max_hop | overlap_count |
+|---|---:|---:|---:|---:|---:|---:|
+| embedding-guided clean | 7 | 22 | 21 | 2.90 | 9.0 | 7 |
+
+seed42 评价结果：
+
+| 方法 | MRR | Top-1 | Top-3 | Top-5 | Event Top-1 | Event Top-3 | Event Top-5 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v2_2 clean | 0.9243 | 0.8693 | 0.9837 | 0.9942 | 0.8227 | 0.9698 | 0.9940 |
+| Cand-Obs | 0.9097 | 0.8413 | 0.9802 | 0.9965 | 0.8370 | 0.9730 | 0.9915 |
+| Two-stage v1 | 0.8849 | 0.8133 | 0.9522 | 0.9837 | 0.7910 | 0.9459 | 0.9877 |
+| v0_2 clean | 0.8814 | 0.7853 | 0.9802 | 0.9942 | 0.7780 | 0.9737 | 0.9921 |
+| embedding-guided clean | 0.8797 | 0.7970 | 0.9522 | 0.9848 | 0.7937 | 0.9841 | 1.0000 |
+| Degree | 0.7933 | 0.6721 | 0.8926 | 0.9545 | 0.6772 | 0.9110 | 0.9668 |
+
+三 seed 汇总结果：
+
+| 方法 | seed_count | MRR mean | MRR std | Top-1 mean | Top-1 std | Top-3 mean | Top-5 mean |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| embedding-guided clean | 3 | 0.8325 | 0.0665 | 0.7379 | 0.0813 | 0.9069 | 0.9596 |
+
+与核心方法三 seed 均值比较：
+
+| 方法 | MRR mean | Top-1 mean | Top-3 mean | Top-5 mean |
+|---|---:|---:|---:|---:|
+| v2_2 clean | 0.8856 | 0.8070 | 0.9685 | 0.9916 |
+| Two-stage v1 | 0.8715 | 0.7811 | 0.9578 | 0.9838 |
+| Cand-Obs | 0.8664 | 0.7827 | 0.9388 | 0.9697 |
+| v0_2 clean | 0.8658 | 0.7725 | 0.9586 | 0.9934 |
+| embedding-guided clean | 0.8325 | 0.7379 | 0.9069 | 0.9596 |
+| Degree | 0.7778 | 0.6426 | 0.9033 | 0.9503 |
+
+写作口径：
+
+- 可写：`embedding-guided clean` 在候选重合数仅为 7、far 候选较多的条件下，seed42 MRR 达到 0.8797，明显高于 `Degree`，并接近 `Two-stage v1` 与 `v0_2 clean`。
+- 可写：`embedding-guided clean` 的三 seed 平均 MRR 和 Top-1 明显高于 `Degree`，说明第4章诊断模型内部节点表征能够提供有效的布局先验。
+- 可写：该方法只与 7 个候选缺陷节点重合，仍能获得高于拓扑基线的定位性能，可用于支撑“布局优化不应等同于候选节点重合最大化”的论点。
+- 可写：与 `v0_2 clean`、`v2_2 clean` 相比，`embedding-guided clean` 的均值较低、方差较大，说明单纯表征多样性尚不能替代外部诊断反馈学习。
+- 不可写：当前布局只由 seed42 编码器生成一次，不能写成“表征复用布局生成过程已完成多 seed 稳定性验证”。如需验证布局生成稳定性，应进一步使用不同 Ch4 checkpoint 或不同 embedding 提取 seed 生成多组布局。
+
+## 11. P2/P3 执行记录：学习型布局稳定性与预算性能重训清单
+
+本轮按核心 5 方法执行 P2/P3 准备工作。核心方法固定为：
+
+```text
+Degree / Cand-Obs / Two-stage v1 / v0_2 clean / v2_2 clean
+```
+
+### 11.1 P2 学习型布局生成多 seed 稳定性
+
+已完成 `v0_2 clean` 和 `v2_2 clean` 的多 seed 结构稳定性实验。该实验不重训诊断模型，只改变 `layout_seed` 并比较生成布局实例的结构波动。
+
+执行脚本：
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\scripts\build_learning_layout_multiseed.py
+E:\11.16\thesis_writing_repo\figures\ch5\scripts\build_ch5_p2_layout_stability_tables.py
+```
+
+执行命令：
+
+```text
+python E:\11.16\script2_new\chapter5_layout_optimization\scripts\build_learning_layout_multiseed.py --methods v0_2_clean_scenario,v2_2_clean_generalization --budgets 25 --layout-seeds 1,2,3,4,5,6,7,8,9,10
+python E:\11.16\thesis_writing_repo\figures\ch5\scripts\build_ch5_p2_layout_stability_tables.py
+```
+
+输出数据：
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_instances.csv
+E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_structure_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_stability_instances.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_jaccard_pairs.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_node_frequency.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_structure_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_stability_README.md
+```
+
+当前结构稳定性摘要：
+
+| 方法 | layout_seed_count | Jaccard mean | direct mean | near mean | far mean | mean_hop mean | overlap mean |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| v0_2 clean | 10 | 0.8725 | 15.0 | 34.2 | 0.8 | 0.964 | 15.0 |
+| v2_2 clean | 10 | 0.8795 | 12.0 | 37.0 | 1.0 | 1.094 | 12.0 |
+
+写作口径：
+
+- 可写：两个 clean 学习型方法在 `N=25` 下的结构指标波动较小，布局生成过程具有较稳定的结构目标。
+- 可写：Jaccard 均值约为 0.87，说明不同 layout seed 下节点集合高度相似但并非完全相同。
+- 不可写：P2 不涉及诊断模型重训，不能直接写成“布局生成 seed 不影响诊断性能”。
+
+### 11.2 P3 核心 5 方法预算性能重训清单与当前状态
+
+已完成 `N=5/10/15/20/25` 的核心预算性能重训清单构建，并启动部分诊断模型训练。该实验属于重训类实验，当前由于本机内存诊断提示存在内存问题，训练阶段暂停，已生成结果仅作为阶段性进展记录，暂不作为完整预算-性能曲线结论。
+
+已生成 `layout_seed=42` 的学习型 canonical 多预算布局：
+
+```text
+python E:\11.16\script2_new\chapter5_layout_optimization\scripts\build_learning_layout_multiseed.py --methods v0_2_clean_scenario,v2_2_clean_generalization --budgets 5,10,15,20,25 --layout-seeds 42
+```
+
+已生成重训 manifest：
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\scripts\build_ch5_core_budget_manifest.py
+E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.csv
+E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.md
+```
+
+manifest 规模：
+
+```text
+5 methods × 5 budgets × 3 diagnosis seeds = 75 commands
+```
+
+方法与预算覆盖：
+
+| 方法 | N=5 | N=10 | N=15 | N=20 | N=25 |
+|---|---:|---:|---:|---:|---:|
+| Degree | 3 | 3 | 3 | 3 | 3 |
+| Cand-Obs | 3 | 3 | 3 | 3 | 3 |
+| Two-stage v1 | 3 | 3 | 3 | 3 | 3 |
+| v0_2 clean | 3 | 3 | 3 | 3 | 3 |
+| v2_2 clean | 3 | 3 | 3 | 3 | 3 |
+
+已生成 P3 结果整理脚本和状态表：
+
+```text
+E:\11.16\thesis_writing_repo\figures\ch5\scripts\build_ch5_p3_budget_performance_tables.py
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_by_seed.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_structure_performance_join.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_README.md
+```
+
+当前 P3 状态：
+
+- expected rows：75
+- available metrics rows：11
+- missing metrics rows：64
+- 暂停原因：Windows 内存诊断提示存在内存问题，训练过程中曾出现 `0xC0000005` 访问冲突、metrics JSON 损坏和系统蓝屏。为避免训练结果文件继续损坏，当前不继续批量重训。
+
+已完成的有效训练结果包括：
+
+| 预算 | 已完成方法与 seed |
+|---|---|
+| `N=25` | `Degree / Cand-Obs / Two-stage v1 / v0_2 clean / v2_2 clean`，均为 diagnosis seed 42 |
+| `N=5` | `Degree` seed 7/42/123；`Cand-Obs` seed 42/123；`Two-stage v1` seed 7 |
+
+当前可写边界：
+
+- 可写：P3 训练清单、canonical 多预算布局和结果整理脚本已经完成，预算性能实验进入可执行状态。
+- 可写：`N=25, seed42` 五种核心方法试跑完成，结果路径与 JSON 汇总口径已经打通。
+- 可写：`N=5` 部分结果显示低预算下性能波动较大，但由于方法与 seed 尚未补齐，只能作为执行进展，不进入正文结论。
+- 不可写：当前不能写完整预算-性能曲线，也不能写“预算增加稳定提升诊断性能”。
+- 不可写：内存问题修复前继续得到的新训练结果不应直接作为正式实验结论。
+
+写作口径：
+
+- 可写：预算性能重训清单已经构建，且已完成 11 条有效训练结果。
+- 不可写：训练尚未完成，不能写预算提升诊断性能。
+- 后续执行建议：先修复内存稳定性问题；恢复训练后按单条命令执行、每条完成后立即校验 JSON，并优先补齐 `N=25` 的 seed 7/123 与 `N=10/15/20` 的核心结果。
+
+### 11.3 当前第五章实验闭环状态
+
+截至当前版本，第五章已经形成可用于正文和中期 PPT 的阶段性闭环：
+
+| 模块 | 状态 | 是否可写入正文/PPT |
+|---|---|---|
+| 核心 5 方法 `N=25` 主结果 | 已完成 | 可作为主结果 |
+| event-level Top-K 表格补齐 | 已完成 | 可作为主结果补充 |
+| direct / near / far 分组性能 | 已完成 | 可作为机制分析 |
+| hard candidates 分层分析 | 已完成 | 可作为机制与边界分析 |
+| 候选节点重合度控制证据 | 已完成 | 可用于回应“是否只选候选节点” |
+| 表征复用布局 `embedding-guided clean` | 已完成三 seed 诊断评价 | 可作为补充方法，不替代主方法 |
+| I/E 类型与场景属性分组 | 已完成源数据整理 | 可作为补充分析，正文可择要写 |
+| Jaccard 与 surrogate 可信度 | 已完成 | 可作为补充证据 |
+| node_holdout 压力测试 | 已完成 | 只作为边界，不进入主排名 |
+| 学习型布局生成多 seed 结构稳定性 | 已完成 | 可写结构稳定性，不写性能稳定性 |
+| 多预算性能重训 P3 | 部分完成，暂停 | 只写执行进展和边界，不写结论 |
+
+当前第五章可以形成的小闭环为：固定第3章母数据和第4章诊断协议，只改变监测节点集合 `S`；比较人工规则、任务驱动、外部诊断反馈学习和诊断模型节点表征复用布局；用空间定位指标给出主结果；再用可观测性分组、困难候选、候选重合度、布局相似度和 node_holdout 说明机制与边界。P3 多预算性能曲线属于后续增强，不影响当前主线成立。

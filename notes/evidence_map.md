@@ -541,3 +541,52 @@ E:\11.16\script2_new\chapter5_layout_optimization\docs\CH5_THESIS_MAIN_RESULTS_S
 
 - 不新增正文没有证明的优势。
 - 不把第5章写成已形成可直接现场部署的最终布点规范。
+
+## 第5章 P2/P3 新增证据状态
+
+### P2 学习型布局生成稳定性
+
+### 可写事实
+
+- `v0_2 clean` 和 `v2_2 clean` 已完成 `layout_seed=1..10`、`N=25` 的布局生成稳定性实验。
+- `v0_2 clean` 的 Jaccard 均值约为 0.8725，`v2_2 clean` 的 Jaccard 均值约为 0.8795。
+- 两种学习型布局的 direct、near、far、mean_hop 和 overlap_count 波动较小，可用于支撑“结构目标较稳定”的表述。
+
+### 数据与文件来源
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_instances.csv
+E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_structure_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_stability_instances.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_jaccard_pairs.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_node_frequency.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_structure_summary.csv
+```
+
+### 禁止越界
+
+- P2 不涉及诊断模型重训，不能写成性能稳定性结论。
+- `layout_seed` 不能与第4章/第5章诊断评价 seed 7、42、123 混写。
+
+### P3 预算性能重训
+
+### 可写事实
+
+- 核心 5 方法预算性能重训清单已生成，共 75 条 scenario split 训练命令。
+- 清单覆盖 `Degree / Cand-Obs / Two-stage v1 / v0_2 clean / v2_2 clean`、预算 `N=5/10/15/20/25` 和诊断 seed 7、42、123。
+- P3 结果整理脚本已生成，当前 75 条 metrics 均为 missing，表示训练尚未完成。
+
+### 数据与文件来源
+
+```text
+E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.csv
+E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.md
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_by_seed.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_structure_performance_join.csv
+```
+
+### 禁止越界
+
+- 训练未完成前，不能写“预算提升诊断性能”。
+- P3 只包含 scenario split，不包含 node_holdout 主排名。

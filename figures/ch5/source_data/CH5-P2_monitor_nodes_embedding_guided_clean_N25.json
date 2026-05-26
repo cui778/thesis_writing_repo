@@ -1,0 +1,63 @@
+{
+  "monitor_nodes": [
+    "MH0201710",
+    "HS1314268",
+    "HS1314512",
+    "HS1306554",
+    "HS1306471",
+    "HS1311475",
+    "HS2003014",
+    "HS1311288",
+    "HS1344261",
+    "HS1308301",
+    "HS1344166",
+    "HS1316677",
+    "MH0242303",
+    "HS1316334",
+    "HS1316417",
+    "HS1316207",
+    "HS1313534",
+    "HS1316396",
+    "HS1316554",
+    "HS1316530",
+    "HS1308324",
+    "HS1316892",
+    "HS1316726",
+    "HS1316671",
+    "HS1330842"
+  ],
+  "strategy": "embedding_guided_clean",
+  "n": 25,
+  "frozen_protocol": {
+    "source_data": "time_gated_full_ie_v4_formal_conservative420_seed42",
+    "seed": 42,
+    "selection_uses_train_split_only": true,
+    "selection_rule": "max_min_diversity_on_l2_normalized_node_embeddings",
+    "evaluation_protocol": "chapter5_sparse_observation_scenario_seed42"
+  },
+  "objective_meta": {
+    "checkpoint": "E:\\11.16\\script2_new\\outputs\\model_checkpoints\\best_model_ch4_timewin_seq24_s42.pth",
+    "encoder_model_type_resolved": "hydraulic_inverse_deepattn",
+    "device": "cuda:0",
+    "teacher_subdir": "time_gated_full_ie_v4_formal_conservative420_seed42",
+    "seed": 42,
+    "sequence_length": 24,
+    "window_stride": 6,
+    "train_windows_used": 12980,
+    "embedding_shape": [
+      128,
+      256
+    ],
+    "full_monitors": "E:\\11.16\\script2_new\\input_1\\monitor_nodes_full_N128.json"
+  },
+  "layout_metrics": {
+    "direct": 7,
+    "near": 22,
+    "far": 21,
+    "mean_hop": 2.9,
+    "max_hop": 9.0,
+    "overlap_count": 7,
+    "monitor_dispersion_mean_hop": 13.143333333333333,
+    "monitor_redundancy_mean_jaccard": 0.08675202112702113
+  }
+}
