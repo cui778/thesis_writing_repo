@@ -1,0 +1,19 @@
+method,layout_id,tier,n_candidate_nodes,min_hop,max_hop
+Degree,degree_N25,direct,12,0,0
+Degree,degree_N25,near,21,1,2
+Degree,degree_N25,far,17,3,15
+Cand-Obs,candidate_observability_N25,direct,15,0,0
+Cand-Obs,candidate_observability_N25,near,34,1,2
+Cand-Obs,candidate_observability_N25,far,1,3,3
+Two-stage v1,two_stage_balanced_layout_v1_N25,direct,18,0,0
+Two-stage v1,two_stage_balanced_layout_v1_N25,near,31,1,2
+Two-stage v1,two_stage_balanced_layout_v1_N25,far,1,4,4
+Node-Feedback,v0_2_clean_scenario_N25,direct,15,0,0
+Node-Feedback,v0_2_clean_scenario_N25,near,34,1,2
+Node-Feedback,v0_2_clean_scenario_N25,far,1,3,3
+Surrogate-Search,v2_2_clean_generalization_N25,direct,12,0,0
+Surrogate-Search,v2_2_clean_generalization_N25,near,37,1,2
+Surrogate-Search,v2_2_clean_generalization_N25,far,1,3,3
+Embedding-Guided,embedding_guided_clean_N25,direct,7,0,0
+Embedding-Guided,embedding_guided_clean_N25,near,22,1,2
+Embedding-Guided,embedding_guided_clean_N25,far,21,3,9

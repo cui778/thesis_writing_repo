@@ -1,0 +1,36 @@
+layer,feature_category,feature_name,description,computation,formal_input
+swmm_output,hydraulic,depth,node water depth,SWMM hydraulic output (m),no
+swmm_output,hydraulic,head,node hydraulic head,SWMM hydraulic output (m),no
+swmm_output,hydraulic,volume,node storage volume,SWMM hydraulic output (m3),no
+swmm_output,hydraulic,lateral_inflow,lateral inflow to node,SWMM hydraulic output (L/s),no
+swmm_output,hydraulic,total_inflow,total inflow to node,SWMM hydraulic output (L/s),no
+swmm_output,hydraulic,total_outflow,total outflow from node,SWMM hydraulic output (L/s),no
+swmm_output,hydraulic,flooding,node flooding volume,SWMM hydraulic output (L/s),no
+swmm_output,water_quality,BODf,fast biodegradable organic matter,SWMM water quality output (mg/L),no
+swmm_output,water_quality,BODs,slow biodegradable organic matter,SWMM water quality output (mg/L),no
+swmm_output,water_quality,NH4,ammonia nitrogen concentration,SWMM water quality output (mg/L),no
+swmm_output,water_quality,NO3,nitrate nitrogen concentration,SWMM water quality output (mg/L),no
+swmm_output,water_quality,DO,dissolved oxygen concentration,SWMM water quality output (mg/L),no
+swmm_output,water_quality,TSSs,settleable suspended solids,SWMM water quality output (mg/L),no
+swmm_output,water_quality,TSSn,non-settleable suspended solids,SWMM water quality output (mg/L),no
+swmm_output,water_quality,TR_in,influent tracer,SWMM water quality output (mg/L),no
+swmm_output,water_quality,TR_ww,wastewater tracer,SWMM water quality output (mg/L),no
+diagnostic_input,raw,depth,节点水深（绝对量级参考）,SWMM output, yes
+diagnostic_input,raw,total_outflow,节点总出流量（绝对量级参考）,SWMM output, yes
+diagnostic_input,raw,pollut_NH4,NH4 浓度（水量扰动的水质伴随响应）,SWMM output, yes
+diagnostic_input,raw,pollut_TSSs,TSSs 浓度（水量扰动的水质伴随响应）,SWMM output, yes
+diagnostic_input,residual,depth_residual,水深偏差（缺陷 - 正常）,"defect[t,n] - baseline[t,n]", yes
+diagnostic_input,residual,total_outflow_residual,出流量偏差（缺陷 - 正常）,"defect[t,n] - baseline[t,n]", yes
+diagnostic_input,residual,pollut_NH4_residual,NH4 浓度偏差（水量扰动的水质伴随响应）,"defect[t,n] - baseline[t,n]", yes
+diagnostic_input,residual,pollut_TSSs_residual,TSSs 浓度偏差（水量扰动的水质伴随响应）,"defect[t,n] - baseline[t,n]", yes
+diagnostic_input,relative_residual,depth_residual_rel,水深相对偏差,residual / (|baseline| + 1e-8), yes
+diagnostic_input,relative_residual,total_outflow_residual_rel,出流量相对偏差,residual / (|baseline| + 1e-8), yes
+diagnostic_input,relative_residual,pollut_NH4_residual_rel,NH4 相对偏差,residual / (|baseline| + 1e-8), yes
+diagnostic_input,relative_residual,pollut_TSSs_residual_rel,TSSs 相对偏差,residual / (|baseline| + 1e-8), yes
+auxiliary_input,time_encoding,sin_hour,小时周期正弦编码,sin(2*pi*hour/24), yes
+auxiliary_input,time_encoding,cos_hour,小时周期余弦编码,cos(2*pi*hour/24), yes
+auxiliary_input,observation_mask,observed_mask,监测节点可见性标记,1 for monitor node else 0, yes
+graph_prior,pairwise_path,shortest_dist,节点对最短跳数,graph_path_features.npz, relational_input
+graph_prior,pairwise_path,pipe_length_dist,节点对管道长度距离,graph_path_features.npz, relational_input
+graph_prior,pairwise_path,flow_direction,节点对水流方向,graph_path_features.npz, relational_input
+graph_prior,pairwise_path,elevation_diff,节点对高程差,graph_path_features.npz, relational_input

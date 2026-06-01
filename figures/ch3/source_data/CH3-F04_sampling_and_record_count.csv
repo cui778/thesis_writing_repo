@@ -1,0 +1,17 @@
+parameter,value,unit
+observation_window,48,hours
+sampling_interval,10,minutes
+total_simulated_time,48,hours
+time_points_per_scenario,287,count
+start_time,2025-01-01 00:10:00,timestamp
+end_time,2025-01-02 23:50:00,timestamp
+unique_nodes,128,count
+node_type_junction,113,count
+node_type_outfall,2,count
+node_type_storage,13,count
+total_conduits,137,count
+hydraulic_variables,7,count (depth head volume lateral_inflow total_inflow total_outflow flooding)
+water_quality_variables,9,count (BODf BODs NH4 NO3 DO TSSs TSSn TR_in TR_ww)
+records_per_scenario,36736,count (128 nodes x 287 time points)
+total_formal_scenarios,441,count (421 IE420 + 20 normal)
+total_formal_records,16200576,count (441 x 36736)

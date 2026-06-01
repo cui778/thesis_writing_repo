@@ -77,42 +77,45 @@ E:\11.16\script2_new\thesis_writing_package\03_CH5_WRITING_CONTEXT.md
 - 不能写成本论文已经完成 P 类水质污染源定位。
 - 不能在绪论中新增正文主体章节没有证明过的贡献。
 
-## 2. 第2章 理论基础与相关研究
+## 2. 第2章 研究区域与研究方法
 
-写作时机：第3/4/5章主体稳定后补写。
+写作时机：已从第3章迁移研究区域、数据来源和SWMM原理内容，并新写了图结构表示、时空图建模和监测点布设优化方法。后续可随实验推进补充细节。
 
 先读：
 
 ```text
-E:\11.16\script2_new\thesis_writing_package\00_GLOBAL_THESIS_CONTEXT.md
+E:\11.16\thesis_writing_repo\chapters\ch2_theory_and_related_work.md
+E:\11.16\script2_new\README.md
 ```
 
 按需读：
 
 ```text
-E:\11.16\script2_new\docs
-E:\11.16\script2_new\README.md
+E:\11.16\script2_new\models\anomaly_detection_model.py
 E:\11.16\script2_new\docs\ROADMAP_ALIGN_TO_PROPOSAL.md
+E:\11.16\script2_new\chapter5_layout_optimization\docs\CH5_FINAL_EXPERIMENT_CLOSURE_AND_OUTLINE_20260413.md
 ```
 
 写作重点：
 
-- SWMM 与排水管网仿真基础。
-- 排水管网缺陷诊断问题。
-- 时序建模与图神经网络。
-- 监测点布设优化相关方法。
+- 研究区域概况与数据来源。
+- SWMM动力波水力演算与水质反应原理（数学公式）。
+- 排水管网有向图表示与sparse-observation协议。
+- GRU时序编码、GCN空间编码与水力逆向注意力机制。
+- 监测点布设优化问题形式化与方法分类。
 
 禁止：
 
 - 不要把第2章写成实验结果章。
-- 不要使用第4/5章结果来替代理论和相关工作梳理。
+- 不要在第2章中出现IE420缺陷矩阵的具体数值。
+- 不要在第2章中评价任何诊断模型的性能。
 
-## 3. 第3章 数据构建与任务定义
+## 3. 第3章 基于SWMM的I/E缺陷多场景数据生成
 
 先读本章主线文件：
 
 ```text
-E:\11.16\script2_new\thesis_writing_package\01_CH3_WRITING_CONTEXT.md
+E:\11.16\thesis_writing_repo\chapters\ch2_theory_and_related_work.md
 E:\11.16\script2_new\chapter3_data_generation\docs\CH3_OUTLINE_AND_DATA_AUDIT_20260414.md
 E:\11.16\script2_new\chapter3_data_generation\docs\CH3_VISUALIZATION_GUIDE_20260414.md
 ```
@@ -142,17 +145,19 @@ E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative
 
 写作重点：
 
-- SWMM 管网建模与全网图结构。
-- IE420 缺陷矩阵构建。
-- 候选缺陷节点、监测节点和缺陷节点之间的关系。
-- 全网时序、残差特征和 time-gated 样本构建。
-- 数据合理性验证，包括缺陷响应、活跃期响应和可观测性差异。
+- SWMM基线模型构建流程与校核结果。
+- V=128、C=50、S=25三类节点集合的定义与关系。
+- IE420缺陷矩阵构建。
+- PySWMM时间门控批量仿真与全网时序输出。
+- Residual派生特征（绝对残差与相对残差）的构造方法。
+- 数据合理性验证：场景完整性、节点覆盖性和缺陷响应合理性。
 
 禁止：
 
 - 不要写第4章模型性能结果。
-- 不要把水质伴随残差写成 P 类水质污染源定位。
-- 不能声称 SWMM 模型已经实测校准，除非另有实测校准证据；当前更稳妥的表述是检查连通性、仿真稳定性、时间序列完整性和缺陷响应合理性。
+- 不要把水质伴随残差写成P类水质污染源定位。
+- 不要在第3章中重复阐述SWMM仿真原理（已在第2章展开）。
+- 不能声称SWMM模型已经实测校准，除非另有实测校准证据；当前更稳妥的表述是检查连通性、仿真稳定性、时间序列完整性和缺陷响应合理性。
 
 ## 4. 第4章 面向缺陷定位的时空图诊断模型研究
 

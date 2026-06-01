@@ -1,0 +1,18 @@
+check_id,check_name,target_dataset,expected_value,actual_value,status,notes
+1,IE420 scenario count,time_gated_full_ie_v4_formal_conservative420_seed42,421,421,pass,1 baseline + 250 I + 170 E
+2,IE420 I-type count,time_gated_full_ie_v4_formal_conservative420_seed42,250,250,pass,infiltration/inflow scenarios
+3,IE420 E-type count,time_gated_full_ie_v4_formal_conservative420_seed42,170,170,pass,exfiltration scenarios
+4,IE420 node count,time_gated_full_ie_v4_formal_conservative420_seed42,128,128,pass,all 128 nodes present in each scenario
+5,IE420 time points,time_gated_full_ie_v4_formal_conservative420_seed42,287,287,pass,48h at 10min interval
+6,IE420 records per scenario,time_gated_full_ie_v4_formal_conservative420_seed42,36736,36736,pass,128 x 287
+7,normal20 scenario count,normal_multibaseline_v2_seedset20,20,20,pass,20 normal perturbation scenarios
+8,normal20 node count,normal_multibaseline_v2_seedset20,128,128,pass,all 128 nodes present
+9,formal combination count,ie420_plus_normal20_v1,441,441,pass,421 + 20
+10,formal combination I count,ie420_plus_normal20_v1,250,250,pass,I-type scenarios
+11,formal combination E count,ie420_plus_normal20_v1,170,170,pass,E-type scenarios
+12,formal combination normal count,ie420_plus_normal20_v1,20,20,pass,normal scenarios
+13,formal combination baseline count,ie420_plus_normal20_v1,1,1,pass,baseline reference scenario
+14,time consistency across scenarios,ie420_plus_normal20_v1,start_time matches,start_time matches,pass,all scenarios start at 2025-01-01 00:10:00
+15,node coverage uniformity,ie420_plus_normal20_v1,128 per scenario,128 per scenario,pass,no missing nodes in any scenario
+16,defect matrix row count,defect_matrix_diverse_ie_v4_formal_conservative420_seed42,420,420,pass,matches IE420 defect scenario count
+17,defect matrix node coverage,defect_matrix_diverse_ie_v4_formal_conservative420_seed42,50 unique nodes,50 unique nodes,pass,candidate defect node set

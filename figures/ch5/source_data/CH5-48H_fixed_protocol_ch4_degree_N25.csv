@@ -1,0 +1,2 @@
+protocol,method,layout,budget,diagnosis_seed,metrics_file,status,role,active_f1,normal_window_fpr,scene_recall,scene_fpr,scene_f1,mrr,top1,top3,top5,note
+"IE420 + normal20 / raw_plus_residual / lambda_loc=0.5",Degree,degree_N25,25,42,E:\11.16\script2_new\outputs\reports\last_run_metrics_48h_control_ie420_normal20_raw_plus_residual_loc0p5_degree_N25_s42.json,formal_fixed_protocol,chapter4_base_layout,0.9790,0.0005,0.9836,0.0000,0.9917,0.8457,0.7728,0.8973,0.9463,"Strictly matches the current Chapter 4 fixed diagnosis protocol and anchors Chapter 5."

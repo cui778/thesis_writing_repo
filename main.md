@@ -9,7 +9,7 @@
 
 ## 写作顺序
 
-1. 第3章：数据构建与任务定义
+1. 第3章：基于SWMM的I/E缺陷多场景数据生成
 2. 第4章：固定监测布局下的缺陷诊断与定位模型
 3. 第5章：面向定位性能提升的监测点布设优化
 4. 第6章：总结与展望
@@ -45,7 +45,7 @@
 
 - [第1章 绪论](chapters/ch1_intro.md)
 - [第2章 研究区域与研究方法](chapters/ch2_theory_and_related_work.md)
-- [第3章 数据构建与任务定义](chapters/ch3_data_generation.md)
+- [第3章 基于SWMM的I/E缺陷多场景数据生成](chapters/ch3_data_generation.md)
 - [第4章 固定监测布局下的缺陷诊断与定位模型](chapters/ch4_model_diagnosis.md)
 - [第5章 面向定位性能提升的监测点布设优化](chapters/ch5_layout_optimization.md)
 - [第6章 总结与展望](chapters/ch6_conclusion.md)

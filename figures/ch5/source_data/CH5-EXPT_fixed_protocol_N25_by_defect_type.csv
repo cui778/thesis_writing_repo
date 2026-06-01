@@ -1,0 +1,13 @@
+method,layout_id,defect_type,n,mrr,top1,top3,top5
+Degree,degree_N25,I,471,0.878238,0.808917,0.957537,0.978769
+Degree,degree_N25,E,405,0.807958,0.730864,0.82716,0.908642
+Cand-Obs,candidate_observability_N25,I,471,0.884739,0.804671,0.95966,0.974522
+Cand-Obs,candidate_observability_N25,E,405,0.897143,0.824691,0.958025,0.980247
+Two-stage v1,two_stage_balanced_layout_v1_N25,I,471,0.902512,0.81741,0.993631,0.995754
+Two-stage v1,two_stage_balanced_layout_v1_N25,E,405,0.91118,0.844444,0.967901,0.997531
+Node-Feedback,v0_2_clean_scenario_N25,I,471,0.901673,0.836518,0.96603,0.980892
+Node-Feedback,v0_2_clean_scenario_N25,E,405,0.889123,0.819753,0.953086,0.985185
+Surrogate-Search,v2_2_clean_generalization_N25,I,471,0.894963,0.798301,0.993631,0.995754
+Surrogate-Search,v2_2_clean_generalization_N25,E,405,0.930926,0.883951,0.967901,0.997531
+Embedding-Guided,embedding_guided_clean_N25,I,471,0.87847,0.791932,0.963907,0.991507
+Embedding-Guided,embedding_guided_clean_N25,E,405,0.867169,0.787654,0.928395,0.980247

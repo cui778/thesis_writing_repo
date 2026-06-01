@@ -1,0 +1,4 @@
+dataset_id,dataset_name,dataset_type,scenario_count,i_count,e_count,normal_count,baseline_count,unique_node_count,records_per_scenario,time_points,sampling_interval_min,defect_csv_used,status,paper_role
+1,IE420 time-gated mother,defect mother data,421,250,170,0,1,128,36736,287,10,formal_420,formal,IE420 defect scenario matrix
+2,normal20,normal condition layer,20,0,0,20,0,128,36736,287,10,none,formal,defect-free normal perturbation layer
+3,ie420_plus_normal20_v1,formal training combination,441,250,170,20,1,128,36736,287,10,formal_420,formal,official dataset for chapters 4 and 5

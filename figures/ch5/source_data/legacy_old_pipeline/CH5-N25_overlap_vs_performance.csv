@@ -1,0 +1,7 @@
+method,layout_id,overlap_count,non_candidate_monitors,mrr,top1,top3,top5
+Degree,degree_N25,12,13,0.845745,0.772831,0.89726,0.946347
+Cand-Obs,candidate_observability_N25,15,10,0.890474,0.813927,0.958904,0.977169
+Two-stage v1,two_stage_balanced_layout_v1_N25,18,7,0.90652,0.829909,0.981735,0.996575
+Node-Feedback,v0_2_clean_scenario_N25,15,10,0.895871,0.828767,0.960046,0.982877
+Surrogate-Search,v2_2_clean_generalization_N25,12,13,0.91159,0.8379,0.981735,0.996575
+Embedding-Guided,embedding_guided_clean_N25,7,18,0.873246,0.789954,0.947489,0.986301

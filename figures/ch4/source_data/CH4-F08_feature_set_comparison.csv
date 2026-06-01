@@ -1,0 +1,4 @@
+feature_set,mrr,top1,top3,active_f1,normal_window_fpr,scene_recall,scene_fpr,scene_f1,lambda_loc,layout,notes
+raw_only,0.2419,0.1438,0.2313,0.4379,0.0564,0.3548,0.6667,0.5116,1.0,degree_N25,HISTORICAL - from seedset10 dataset (not formal normal20 protocol) - original: raw time-series features
+residual_only,0.8082,0.7158,0.8665,0.9645,0.0027,0.9355,0.0000,0.9667,1.0,degree_N25,HISTORICAL - from seedset10 dataset (not formal normal20 protocol) - original: residual features
+raw_plus_residual,0.8290,0.7319,0.9206,0.9766,0.0145,1.0000,0.0000,1.0000,1.0,degree_N25,HISTORICAL - from seedset10 dataset (not formal normal20 protocol) - original: combined features

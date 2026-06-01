@@ -1,0 +1,6 @@
+﻿method,budget,diagnosis_seed,needed_for,current_status,next_action
+Cand-Obs,25,42,CH5 N25 optimization-method main table,available_old_or_bridge_only,run_or_verify_under_IE420_normal20_raw_plus_residual_loc0p5
+Two-stage v1,25,42,CH5 N25 optimization-method main table,available_old_or_bridge_only,run_or_verify_under_IE420_normal20_raw_plus_residual_loc0p5
+Node-Feedback,25,42,CH5 N25 optimization-method main table,available_old_or_bridge_only,run_or_verify_under_IE420_normal20_raw_plus_residual_loc0p5
+Surrogate-Search,25,42,CH5 N25 optimization-method main table,available_old_or_bridge_only,run_or_verify_under_IE420_normal20_raw_plus_residual_loc0p5
+Embedding-Guided,25,42,CH5 N25 optimization-method main table,available_old_or_bridge_only,run_or_verify_under_IE420_normal20_raw_plus_residual_loc0p5

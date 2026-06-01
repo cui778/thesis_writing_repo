@@ -1,0 +1,15 @@
+statistic,value
+total_defect_scenarios,420
+i_type_count,250
+e_type_count,170
+unique_defect_nodes,50
+intensity_pct_min,40
+intensity_pct_max,60
+duration_h_min,12
+duration_h_max,18
+start_hour_min,2
+start_hour_max,26
+defect_csv_columns,"defect_id,defect_type,node_id,link_id,intensity_pct,start_hour,duration_h,flow,BODf,NH4,DO,baseline_flow"
+i_type_description,Infiltration/Inflow - external water entering the system
+e_type_description,Exfiltration - water leaking out of the system
+temporal_protocol,time-gated (defect active only during [start_hour, start_hour+duration_h))

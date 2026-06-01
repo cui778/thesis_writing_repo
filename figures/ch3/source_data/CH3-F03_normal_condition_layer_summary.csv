@@ -1,0 +1,13 @@
+parameter,value,description
+normal_scenario_count,20,total normal perturbation scenarios
+flow_noise_pct,6.0,percentage noise added to base flow
+quality_noise_pct,4.0,percentage noise added to water quality concentrations
+daily_variation_pct,3.0,percentage daily variation coefficient
+normal_seeds,"42,101,202,303,404,505,606,707,808,909,1001,1102,1203,1304,1405,1506,1607,1708,1809,1910",random seeds for perturbation generation
+source_ie_dir,time_gated_full_ie_v4_formal_conservative420_seed42,IE420 mother data used as base response
+residual_reference,scenario_id=0 BASELINE,baseline scenario used for residual alignment
+time_window_hours,48,observation window duration
+sampling_interval_min,10,sampling interval in minutes
+time_points_per_scenario,287,valid time points per scenario
+nodes_per_scenario,128,nodes per scenario
+records_per_scenario,36736,total node-time records per scenario

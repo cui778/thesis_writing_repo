@@ -6,7 +6,7 @@
 
 ### 本章要支撑的表述
 
-基于黄孝河-机场河流域工程资料划定研究子区，构建可独立运行的 SWMM baseline 模型；在此基础上通过 PySWMM 批量注入 I/E 缺陷，导出全网 128 节点时序，并与 baseline 对齐构造 residual 特征，形成第4章和第5章共用的正式母数据。
+基于黄孝河-机场河流域工程资料划定研究子区，构建可独立运行的 SWMM 基线模型；在此基础上生成正常工况响应，并通过 PySWMM 批量注入 I/E 缺陷，导出全网 128 节点时序。数据处理中，从正常工况层选取一条 reference 响应作为 residual 对齐参照，形成第4章和第5章共用的正式母数据。
 
 ### 可写事实
 
@@ -15,9 +15,11 @@
 - 模型配置水力输出字段：`depth`、`head`、`volume`、`lateral_inflow`、`total_inflow`、`total_outflow`、`flooding`。
 - 模型配置水质组分：BODf、BODs、NH4、NO3、DO、TSSs、TSSn、TR_in、TR_ww；后续诊断主用 NH4 与 TSSs 作为水质伴随响应特征。
 - 正式缺陷矩阵为 IE420：420 个 I/E 缺陷场景，其中 I=250、E=170；I 覆盖 50 个候选节点，E 覆盖 34 个合法渗漏节点。
-- 正式母数据包含 baseline + IE420，共 421 个场景；采样间隔 10 min；每场景 287 个时间点；每场景 36736 条节点记录。
+- 正式数据包含 21 条正常工况响应和 420 条 I/E 缺陷工况响应，共 441 个场景；采样间隔 10 min；每场景 287 个时间点；每场景 36736 条节点记录。
+- 正式训练组合为 `ie420_plus_normal20_v1`。正常工况响应处于同一数据层级，其中选取一条 reference 场景用于 residual 对齐，其余正常扰动场景用于刻画正常波动范围。
+- 48 h 是统一观测窗口，不是缺陷寿命假设。
 - 正式母数据为全网节点输出，`key_nodes_only=false`、`strict_monitor_only=false`，不是监测节点子集。
-- 50 个候选节点均进入正式缺陷激活空间；固定监测节点与实际激活缺陷节点交集为 12。
+- 50 个候选节点均进入正式缺陷激活空间。
 
 ### 数据与文件来源
 
@@ -28,18 +30,19 @@ E:\11.16\script2_new\input_1\node_list.json
 E:\11.16\script2_new\input_1\candidate_nodes_new.json
 E:\11.16\script2_new\input_1\monitor_nodes_degree_N25.json
 E:\11.16\script2_new\input_1\defect_matrix_diverse_ie_v4_formal_conservative420_seed42.csv
-E:\11.16\script2_new\input_1\defect_matrix_diverse_ie_v4_formal_conservative420_seed42.summary.json
 E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative420_seed42\dataset_manifest.json
 E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative420_seed42\scenario_summary.csv
-E:\11.16\script2_new\chapter3_data_generation\outputs\chapter3_formal_dataset_statistics.csv
-E:\11.16\script2_new\chapter3_data_generation\outputs\chapter3_node_set_relationships.csv
-E:\11.16\script2_new\chapter3_data_generation\outputs\chapter3_residual_energy_by_scenario.csv
-E:\11.16\01 黄机项目资料情况\黄机排水系统.pdf
-E:\11.16\01 黄机项目资料情况\黄机污水系统.pdf
-E:\11.16\01 黄机项目资料情况\黄机流域水环境问题.pdf
-E:\11.16\01 黄机项目资料情况\黄机流域整体调度现状与问题总结.docx
-E:\11.16\01 黄机项目资料情况\武汉市黄孝河、机场河水环境综合治理二期PPP项目主要子项功能.docx
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F01_dataset_protocol_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F02_ie420_defect_matrix_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F03_normal_condition_layer_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F04_sampling_and_record_count.csv
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F05_residual_feature_definition.csv
+E:\11.16\thesis_writing_repo\figures\ch3\source_data\CH3-F06_dataset_integrity_audit.csv
 ```
+
+### 待恢复的外部工程资料
+
+研究区域背景、排水系统概况与工程边界描述来自黄孝河-机场河流域工程资料。原始 PDF 与 DOCX 当前未保存在本仓库中，后续应在资料归档后补充稳定路径。正文可以使用已经核对过的工程背景表述，但在正式提交前需要恢复原始资料索引。
 
 ### 可写边界
 
@@ -58,18 +61,22 @@ E:\11.16\01 黄机项目资料情况\武汉市黄孝河、机场河水环境综�
 
 ### 第4章总论要支撑的表述
 
-第4章在第3章 IE420 time-gated 连续缺陷场景基础上，研究固定 `degree N25` 稀疏监测布局下的 I/E 缺陷诊断与候选节点定位问题。模型保留 128 节点全图拓扑，使用 25 个监测节点动态观测，在 50 个候选缺陷节点空间内形成定位排序；诊断链条组织为“滑动窗口样本 -> 窗口级诊断证据 -> 场景级活跃期定位 -> 场景级空间定位 -> 综合诊断”。
+第4章在第3章 IE420 time-gated 连续缺陷场景基础上，研究固定 `degree N25` 稀疏监测布局下的 I/E 缺陷诊断与候选节点定位问题。模型保留 128 节点全图拓扑，使用 25 个监测节点动态观测，在 50 个候选缺陷节点空间内形成定位排序；诊断链条组织为“滑动窗口样本 -> 窗口级诊断证据 -> 场景时间级定位 -> 场景空间级定位 -> 场景报警级判断 -> 综合诊断”。
 
 ### 第4章可写事实
 
 - 正式缺陷类型：I/E。
 - 正式缺陷矩阵：IE420。
 - 正式数据口径：time-gated，即缺陷在 `start_hour` 和 `duration_h` 定义的时间段内激活。
+- 正式训练组合：ie420_plus_normal20_v1（421 场景 + 20 normal = 441 场景）。
 - 图输入范围：全网 128 节点拓扑。
 - 固定监测布局：`degree N25`，25 个监测节点。
+- `degree N25` 监测节点与候选缺陷节点交集为 12。
 - 定位评价空间：50 个候选缺陷节点。
 - 正式训练入口：`scripts/train_privileged_teacher_student.py`。
 - 正式输入协议：full-graph sparse-observation，保留拓扑和 observed mask，非观测节点动态特征不作为可见观测。
+- 正式业务时序特征为 `raw_plus_residual`：4 维原始特征、4 维绝对残差和 4 维相对残差，共 12 维。数据加载阶段另行追加 2 维小时周期编码和 1 维 `observed_mask`，因此时序编码器实际接收 15 维节点动态输入。
+- 主模型还读取 `shortest_dist`、`pipe_length_dist`、`flow_direction` 和 `elevation_diff` 四类节点对静态路径先验，用于液压逆向注意力计算；这些关系特征不计入节点动态输入维度。
 - 正式空间定位基线：`sequence_length=36`，约 6 h；`window_stride=6`，约 1 h。
 - 第5章任务：在第4章固定诊断任务、模型协议和候选空间基础上优化监测节点集合 `S`。
 
@@ -79,13 +86,12 @@ E:\11.16\01 黄机项目资料情况\武汉市黄孝河、机场河水环境综�
 E:\11.16\thesis_writing_repo\chapters\ch4_model_diagnosis.md
 E:\11.16\thesis_writing_repo\chapters\ch4_task_metric_definition.md
 E:\11.16\thesis_writing_repo\ppt\part4_model_diagnosis_ppt_text.md
-E:\11.16\script2_new\scripts\README.md
+E:\11.16\script2_new\README.md
 E:\11.16\script2_new\scripts\train_privileged_teacher_student.py
 E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py
-E:\11.16\script2_new\scripts\summarize_time_window_length_eval.py
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv
 E:\11.16\script2_new\input_1\defect_matrix_diverse_ie_v4_formal_conservative420_seed42.csv
-E:\11.16\script2_new\input_1\defect_matrix_diverse_ie_v4_formal_conservative420_seed42.summary.json
 E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative420_seed42
 ```
 
@@ -124,7 +130,7 @@ E:\11.16\script2_new\input_1\candidate_nodes_new.json
 E:\11.16\script2_new\input_1\monitor_nodes_degree_N25.json
 E:\11.16\script2_new\input_1\defect_matrix_diverse_ie_v4_formal_conservative420_seed42.csv
 E:\11.16\script2_new\training_data_new\time_gated_full_ie_v4_formal_conservative420_seed42\dataset_manifest.json
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10b_candidate_observability_counts.csv
 ```
 
 ### 可写边界
@@ -160,7 +166,7 @@ E:\11.16\script2_new\models\anomaly_detection_model.py
 E:\11.16\script2_new\scripts\train_privileged_teacher_student.py
 E:\11.16\script2_new\utils\evaluation.py
 E:\11.16\thesis_writing_repo\chapters\ch4_task_metric_definition.md
-E:\11.16\script2_new\scripts\README.md
+E:\11.16\script2_new\README.md
 ```
 
 ### 禁止越界
@@ -173,16 +179,17 @@ E:\11.16\script2_new\scripts\README.md
 
 ### 本节要支撑的表述
 
-第4章评价指标按任务链分层组织：窗口级 active 识别、窗口级节点定位、场景级活跃期定位、场景级空间定位和综合诊断审查。`scenario split` 是正式主协议，`node_holdout` 是泛化压力测试。
+第4章评价指标按任务链分层组织：窗口级 active 识别、窗口级节点定位、场景级活跃期定位、场景级空间定位、场景报警级判断和综合诊断审查。`scenario split` 是正式主协议，`node_holdout` 是泛化压力测试。
 
 ### 可写事实
 
 - `scenario split` 保证同一场景窗口不跨训练、验证和测试集合。
 - `node_holdout` 用于未见缺陷节点压力测试，不作为正式主性能口径。
-- 窗口级 active 指标：Active Accuracy、Active Recall、Active-period Recall。
+- 窗口级 active 指标：Active Accuracy、Active Recall、Active-period Recall、Active F1、Normal Window FPR。
 - 节点定位指标：MRR、Top-1、Top-3、Top-5。
 - 场景级空间定位指标：Event Top-1、Event Top-3、Event Top-5。
 - 场景级活跃期定位指标：onset error、±1/±2/±3 窗口命中、active interval IoU。
+- 场景报警级指标：Scene Precision、Scene Recall、Scene FPR、Scene F1。
 - 综合诊断指标：起点命中与节点 Top-K 同时满足的联合指标，作为补充审查。
 
 ### 数据与文件来源
@@ -191,7 +198,6 @@ E:\11.16\script2_new\scripts\README.md
 E:\11.16\thesis_writing_repo\chapters\ch4_task_metric_definition.md
 E:\11.16\script2_new\utils\evaluation.py
 E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py
-E:\11.16\script2_new\scripts\summarize_time_window_length_eval.py
 ```
 
 ### 禁止越界
@@ -203,40 +209,40 @@ E:\11.16\script2_new\scripts\summarize_time_window_length_eval.py
 
 ### 本节要支撑的表述
 
-在固定 `degree N25` sparse-observation 协议和 IE420 time-gated 数据下，主模型能够稳定完成窗口级诊断证据提取和场景级事件定位；与三类基线相比，主模型具有明显优势；窗口长度实验揭示时间段定位与空间定位稳定性之间的尺度权衡。
+在固定 `degree N25` sparse-observation 协议和 IE420 + normal20 正式数据下，主模型能够稳定完成窗口级诊断证据提取和场景级事件定位；特征组合与定位损失权重分析确认 residual 是主要有效信息来源；窗口长度实验揭示时间段定位与空间定位稳定性之间的尺度权衡。
 
 ### 可写事实
 
-- 正式主线为 `ch1_fullgraph_degree_ie420_s*_fix1`。
-- 主模型 seed 7/42/123 已完成多种子复核。
-- 主模型三种子均值：MRR=0.7778，Top-1=0.6426，Top-5=0.9503，Event Top-5=0.9735，Active Recall=0.9590。
-- seed42 主结果：MRR=0.7933，Top-1=0.6721，Top-5=0.9545，Event Top-5=0.9841。
-- 多 seed 模型对比均值：
-  - `hydraulic_inverse_deepattn`：MRR=0.7778，Top-5=0.9503，Event Top-5=0.9735。
-  - `gru_gcn`：MRR=0.2049，Top-5=0.2585，Event Top-5=0.2646。
-  - `hydraulic_inverse`：MRR=0.3423，Top-5=0.4211，Event Top-5=0.4550。
-  - `lstm_graphsage_edge`：MRR=0.4139，Top-5=0.4522，Event Top-5=0.4656。
-- 窗口长度实验：
+- 正式协议：ie420+normal20 / raw_plus_residual / lambda_loc=0.5 / hydraulic_inverse_deepattn / degree_N25 / scenario split / seeds=7/42/123。
+- seed42 主结果（正式协议）：MRR=0.8457，Top-1=0.7728，Top-3=0.8973，Top-5=0.9463，Active F1=0.9790，Normal Window FPR=0.0005，Scene F1=0.9917。
+- 多 seed（正式协议，Degree_N25_formal）：
+  - seed7：MRR=0.8477，Top-1=0.7413，Top-3=0.9443，Top-5=0.9741，Event Top-1=0.7969，Scene F1=1.0000。
+  - seed42：MRR=0.8457，Top-1=0.7728，Top-3=0.8973，Top-5=0.9463，Event Top-1=0.8197，Scene F1=0.9917。
+  - seed123：MRR=0.7827，Top-1=0.6425，Top-3=0.9161，Top-5=0.9759，Event Top-1=0.6885，Scene F1=1.0000。
+以下特征组合、窗口长度和 I/E 分组结果来自历史探索协议，用于解释正式协议的形成过程或讨论方法边界，不作为当前 `IE420 + normal20` 正式主性能证据。
+
+- 特征组合对照（历史 seedset10 数据，调参依据，非正式协议性能）：
+  - raw_only：MRR=0.2419。
+  - residual_only：MRR=0.8082。
+  - raw_plus_residual：MRR=0.8290。
+- 窗口长度实验（旧协议数据，趋势参考）：
   - 2h：onset error=0.7131h，interval IoU=0.9124，窗口 Top-5=0.9303。
   - 3h：onset error=0.8497h，interval IoU=0.8455，窗口 Top-5=0.9044。
   - 6h：onset error=2.2151h，interval IoU=0.7226，窗口 Top-5=0.9545。
-- I/E 分组定位：
+- I/E 分组定位（旧协议数据，趋势参考）：
   - I 类：MRR=0.8076，Top-1=0.6862，Top-5=0.9711。
   - E 类：MRR=0.7377，Top-1=0.5838，Top-5=0.9224。
 
 ### 数据与文件来源
 
 ```text
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\CH4_RESULT_AUDIT_FOR_WRITING.md
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_long.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_ie_type_group_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_main_multiseed.png
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_model_comparison_multiseed.png
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_ie_type_group.png
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_tradeoff.png
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_feature_set_comparison.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_model_comparison_multiseed_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09a_time_boundary_audit_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_time_window_length_eval_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_ie_type_group_summary.csv
 ```
 
 ### 可写边界
@@ -267,12 +273,9 @@ E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window
 ### 数据与文件来源
 
 ```text
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_nodehold_observability_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_split_vs_nodehold.png
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_observability_analysis.png
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_timeline_case.png
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10b_nodehold_observability_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10b_candidate_observability_counts.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_time_window_length_eval_summary.csv
 ```
 
 ### 禁止越界
@@ -281,46 +284,48 @@ E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig
 - 不把 predicted-active scene Top-K 低写成主模型空间定位失败。
 - 不把 oracle active 结果写成实际模型诊断性能。
 
-## 第5章 诊断反馈驱动的监测节点布局优化
+## 第5章 融合诊断反馈与节点表征的排水管网监测布局优化
 
 ### 第5章总论要支撑的表述
 
-第5章在第3章 IE420 母数据和第4章诊断任务、模型结构、窗口设置与评价协议固定的前提下，只改变监测节点集合 `S` 与 observed mask，研究监测布局对 I/E 缺陷空间定位性能的影响。本章主线是从人工规则选点走向诊断结果反馈指导布点，正式学习型方法采用 clean 双层口径：`v0_2 clean` 表示节点级反馈学习，`v2_2 clean` 表示布局级代理搜索。
+第5章在第3章 IE420 母数据和第4章诊断任务、模型结构、窗口设置与评价协议固定的前提下，只改变监测节点集合 `S` 与 observed mask，研究监测布局对 I/E 缺陷空间定位性能的影响。本章主线是从拓扑规则布局走向诊断表征驱动布局。所有结果均在统一协议 `IE420 + normal20 / raw_plus_residual / lambda_loc=0.5` 下获得，采用 3 个诊断 seed 评价。
 
 ### 第5章核心可写事实
 
-- 固定内容：IE420 母数据、128 节点全图拓扑、50 个候选缺陷节点、第4章诊断任务、模型结构、窗口设置与评价协议。
+- 固定内容：IE420+normal20 母数据、128 节点全图拓扑、50 个候选缺陷节点、第4章诊断任务、模型结构、窗口设置与评价协议。
 - 唯一变化：监测节点集合 `S`、`monitor_nodes_file`、observed mask。
-- 主评价：`scenario split`、预算 `N=25`、seed 7/42/123。
-- 主排名指标：MRR、Top-1、Top-3、Top-5、event-level Top-K 空间定位指标。
-- 不作为第5章主排名：onset error、active interval IoU、活跃期起止边界误差。
-- 人工规则与任务驱动基线：`Degree`、`Cand-Obs`、`Two-stage v1`。
-- clean 学习型主线：
-  - `v0_2 clean`：节点级反馈学习，回答“哪些节点值得被选”。
-  - `v2_2 clean`：布局级代理搜索，回答“哪些节点组合整体更优”。
-- `v0_2 generalization` 可作为性能参考或内部记录，不作为中期正式主线。
-- 旧 `v2_2`、`v1_1/v1_2/v1_3` 图上下文探索不进入中期正式答辩主线。
+- 主评价：`scenario split`、预算 `N=25`、诊断 seed 7/42/123。
+- 主排名指标：MRR、Top-1、Top-3、Top-5、Event Top-1、Event Top-3、Event Top-5、Scene F1。
+- 6 种布局方法：Degree、Betweenness、Cand-Obs、Two-stage v1、Node-Feedback (val)、Embedding-Guided。
+- 方法命名：正式表中 `Node-Feedback (val)` 为 Node-Feedback 的 scenario val 口径；CSV 中的内部名称 `Embedding-Guided-new` 在论文正文中统一写为 `Embedding-Guided`。
+- Two-stage v1 定位为”离线仿真信息充分条件下的任务导向启发式参考”，不作为本文创新。
+- Node-Feedback 定位为”探索性反馈学习方法”，训练数据仅 3 种布局 x 3 种子 = 9 组。
+- Embedding-Guided 为正文主方法，利用诊断编码器节点嵌入的 max-min diversity 选点。
+- 所有 mean±std 使用 ddof=1（样本标准差）。
+- 预算曲线仅 seed42，写趋势不写稳定性。
 
 ### 第5章核心证据来源
 
 ```text
-E:\11.16\thesis_writing_repo\chapters\ch5_experiment_plan.md
-E:\11.16\script2_new\chapter5_layout_optimization\docs\CH5_FINAL_EXPERIMENT_CLOSURE_AND_OUTLINE_20260413.md
-E:\11.16\script2_new\chapter5_layout_optimization\docs\CH5_THESIS_MAIN_RESULTS_SEED_SUMMARY_20260413.md
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_1_layout_structure.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_2_main_scenario_seed_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_4_node_holdout_boundary_seed42.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\ch5_thesis_main_results_by_seed.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_summary.csv
+thesis_writing_repo/figures/ch5/source_data/CH5-EXPT_fixed_protocol_N25_main_table.csv    — 正式主表，6 方法 x 3 种子
+thesis_writing_repo/figures/ch5/source_data/CH5-budget_sweep_seed42.csv                     — 预算曲线 seed42
+thesis_writing_repo/figures/ch5/source_data/CH5-N25_hard_candidate_analysis.csv            — 困难候选分析
+thesis_writing_repo/figures/ch5/source_data/CH5-N25_by_defect_type_analysis.csv            — I/E 类型分析
+thesis_writing_repo/figures/ch5/source_data/CH5-N25_pairwise_jaccard.csv                   — Jaccard 布局相似度
+thesis_writing_repo/figures/ch5/source_data/CH5-N25_layout_structure.csv                   — 布局结构特征
 ```
 
 ### 第5章禁止越界
 
 - 不把第5章写成重新训练或重新定义诊断任务的章节。
 - 不把第5章结果倒灌回第4章固定 `degree N25` 主结果。
-- 不把 `node_holdout` 写成已经解决严格未见节点泛化。
-- 不把非 clean 探索版本写入中期正式答辩主线。
+- 不把 Two-stage v1 写成本文创新。
+- 不把 Embedding-Guided 写成”完全独立于候选机制”。
+- 不把 Node-Feedback 写成”学习通用布局模式”。
+- 不把预算曲线写成稳定性结论。
 - 不把结构指标更优直接写成诊断性能必然更优。
+- 不使用旧方法名 `v0_2 clean`/`v2_2 clean`；正式命名见主表 CSV。
+- 不把 Surrogate-Search 放入主表（已移除）。
 
 ## 第5章第5.1节 监测节点布局优化问题定义
 
@@ -342,7 +347,7 @@ E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_summary.csv
 E:\11.16\script2_new\input_1\node_list.json
 E:\11.16\script2_new\input_1\candidate_nodes_new.json
 E:\11.16\script2_new\input_1\monitor_nodes_degree_N25.json
-E:\11.16\script2_new\thesis_writing_package\03_CH5_WRITING_CONTEXT.md
+E:\11.16\thesis_writing_repo\chapters\ch5_layout_optimization.md
 ```
 
 ### 禁止越界
@@ -358,235 +363,172 @@ E:\11.16\script2_new\thesis_writing_package\03_CH5_WRITING_CONTEXT.md
 
 ### 可写事实
 
-- 固定诊断任务、模型结构、窗口设置和评价协议。
-- 不共用同一个 checkpoint，而是在相同协议下比较不同布局。
-- 主排名只看空间定位指标。
-- `node_holdout` 是压力测试，不是主排名。
+- 统一数据来源、统一候选空间、统一训练与评价协议。
+- 不共用同一个 checkpoint，而是在相同诊断协议下比较不同布局。
+- 主排名指标为 MRR、Top-1、Top-3、Top-5 和 event-level 空间定位 Top-K。
+- 多 seed 评价口径：诊断 seed 7/42/123，mean ± std（ddof=1）。
+- 实验分组：纯拓扑基线（Degree, Betweenness）→ 覆盖导向基线（Cand-Obs, Two-stage v1）→ 诊断表征驱动方法（Node-Feedback, Embedding-Guided）。
 
 ### 数据与文件来源
 
 ```text
 E:\11.16\thesis_writing_repo\chapters\ch5_experiment_plan.md
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\README.md
+E:\11.16\thesis_writing_repo\chapters\ch5_layout_optimization.md
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-EXPT_fixed_protocol_N25_main_table.csv
 ```
 
 ### 禁止越界
 
-- 不用“同一诊断评价器固定”造成共用 checkpoint 的误解。
-- 不把第4章活跃期定位指标混入第5章布局主排名。
+- 不用”同一诊断评价器固定”造成共用 checkpoint 的误解。
+- 不把第4章活跃期定位指标（onset error、interval IoU）混入第5章布局主排名。
 
-## 第5章第5.3节 人工规则与任务驱动布局基线
+## 第5章第5.3节 对比方法：拓扑规则、覆盖导向与诊断表征
 
 ### 本节要支撑的表述
 
-`Degree`、`Cand-Obs` 和 `Two-stage v1` 构成人工规则与任务驱动基线，用于说明从拓扑中心性到候选可观测性和平衡约束的递进。
+六种布局方法按”诊断信息介入程度”排列，分别代表不同信息来源：纯拓扑规则（Degree、Betweenness）、任务设计经验（Cand-Obs、Two-stage v1）、诊断模型反馈（Node-Feedback、Embedding-Guided）。
 
 ### 可写事实
 
-- `Degree`：拓扑度数基线。
-- `Cand-Obs`：候选可观测性布局。
-- `Two-stage v1`：两阶段平衡布局。
-- 结构统计：
-  - `Degree`：direct=12，near=21，far=17，mean_hop=3.48。
-  - `Cand-Obs`：direct=15，near=34，far=1，mean_hop=0.94。
-  - `Two-stage v1`：direct=18，near=31，far=1，mean_hop=0.92。
+- 层次一（规则驱动）：Degree、Betweenness — 无诊断信息，纯拓扑中心性。
+- 层次二（覆盖导向）：Cand-Obs、Two-stage v1 — 基于候选节点位置和 SWMM 仿真响应的任务设计经验。
+- 层次三（诊断表征驱动）：Node-Feedback、Embedding-Guided — 诊断模型的外部评价或内部表征。
+- 关键定位：
+  - Two-stage v1：离线仿真信息充分条件下的任务导向启发式参考，非本文创新。
+  - Node-Feedback：探索性反馈学习方法，训练数据仅 9 组。
+  - Embedding-Guided：正文主方法，利用诊断编码器节点嵌入的 max-min diversity 选点。
+- 结构统计（来自 CH5-N25_layout_structure.csv）：
+  - Degree：direct=12，near=21，far=17，mean_hop=3.48。
+  - Betweenness：结构特征见正式表。
+  - Cand-Obs：direct=15，near=34，far=1，mean_hop=0.94。
+  - Two-stage v1：direct=18，near=31，far=1，mean_hop=0.92。
+  - Node-Feedback (val)：结构特征见正式表。
+  - Embedding-Guided：结构特征见正式表。
 
 ### 数据与文件来源
 
 ```text
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_1_layout_structure.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-N25_layout_structure.csv
+E:\11.16\thesis_writing_repo\chapters\ch5_layout_optimization.md
 ```
 
 ### 禁止越界
 
-- 不把 `Two-stage v1` 写成第五章最高创新点；它是可解释规则框架和基线。
+- 不把 Surrogate-Search 放入主表或本节方法列表（已移除）。
+- 不使用旧版本名（`v0_2 clean`、`v2_2 clean`）。
 
-## 第5章第5.4节 诊断反馈驱动的学习型布局方法
+## 第5章第5.4节 不同布局方法的定位性能对比
 
 ### 本节要支撑的表述
 
-第5章正式学习型方法采用 clean 双层口径：`v0_2 clean` 学习节点级布设价值，`v2_2 clean` 搜索布局级组合质量。二者不是版本堆叠，而是从“哪些节点值得选”到“哪些节点组合更优”的递进。
+在 N=25、3 种子条件下，6 种布局方法的空间定位性能存在系统性差异。诊断表征驱动方法（尤其是 Embedding-Guided）在 MRR 和 Top-1 上整体优于纯拓扑规则基线；Two-stage v1 在 Event Top-1 上表现最高，但依赖全部缺陷场景仿真响应。
 
-### 可写事实
+### 可写事实（来自 CH5-EXPT_fixed_protocol_N25_main_table.csv，3 seed mean±std, ddof=1）
 
-- `v0_2 clean`：
-  - MRR=0.8658±0.0142；
-  - Top-1=0.7725±0.0111；
-  - Top-5=0.9934±0.0029；
-  - event Top-1=0.8254±0.0420。
-- `v2_2 clean`：
-  - MRR=0.8856±0.0423；
-  - Top-1=0.8070±0.0675；
-  - Top-5=0.9916±0.0100；
-  - event Top-1=0.8307±0.0458。
+- Degree：MRR=0.825±0.037，Top-1=0.719±0.069，Top-3=0.919±0.024，Top-5=0.965±0.016，Event Top-1=0.768±0.070，Scene F1=0.997±0.005。
+- Betweenness：MRR=0.868±0.009，Top-1=0.772±0.011，Top-3=0.961±0.019，Top-5=0.990±0.009，Event Top-1=0.785±0.016，Scene F1=0.994±0.010。
+- Cand-Obs：MRR=0.878±0.034，Top-1=0.795±0.053，Top-3=0.951±0.022，Top-5=0.983±0.010，Event Top-1=0.807±0.044，Scene F1=0.997±0.005。
+- Two-stage v1：MRR=0.905±0.027，Top-1=0.832±0.043，Top-3=0.974±0.018，Top-5=0.989±0.014，Event Top-1=0.855±0.024，Scene F1=1.000±0.000。
+- Node-Feedback (val)：MRR=0.896±0.032，Top-1=0.815±0.058，Top-3=0.970±0.013，Top-5=0.996±0.002，Event Top-1=0.856±0.082，Scene F1=1.000±0.000。
+- Embedding-Guided：MRR=0.897±0.017，Top-1=0.818±0.029，Top-3=0.981±0.008，Top-5=0.999±0.002，Event Top-1=0.828±0.041，Scene F1=0.997±0.005。
+
+### 叙事主线（不是排行榜）
+
+1. 纯拓扑布局仍有优化空间（Degree MRR=0.825±0.037）。
+2. 覆盖邻近并不是唯一有效策略（Cand-Obs 0.878±0.034，Two-stage 0.905±0.027）。
+3. Embedding-Guided 是正文主方法（MRR 0.897±0.017，三条独立证据）。
+4. 结论落点：诊断表征能够提供不同于拓扑和覆盖规则的布局依据。
 
 ### 数据与文件来源
 
 ```text
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_2_main_scenario_seed_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\ch5_thesis_main_results_by_seed.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\structural_innovation\learnable_layout_network_v0_2_clean_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\structural_innovation\learnable_layout_network_v2_2_clean_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-EXPT_fixed_protocol_N25_main_table.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-N25_layout_structure.csv
 ```
-
-### 可写边界
-
-- 可以写 `v0_2 clean` 是节点级反馈学习。
-- 可以写 `v2_2 clean` 是布局级代理搜索。
-- 可以写 `v2_2 clean` 的 Top-1 更高，但方差较大。
-
-### 禁止越界
-
-- 不把 `v0_2 generalization` 当作中期正式主线。
-- 不把 `v2_2 clean` 写成稳定全面最优。
-- 不把学习型布局写成在线自适应布点。
-
-## 第5章第5.5节 不同布局方案的空间定位结果
-
-### 本节要支撑的表述
-
-在主协议下，任务驱动和学习型布局整体优于 `Degree`，说明监测节点布局会显著影响空间定位性能。
-
-### 可写事实
-
-- `Degree`：MRR=0.7778±0.0146，Top-1=0.6426±0.0260，Top-5=0.9503±0.0366。
-- `Cand-Obs`：MRR=0.8664±0.0381，Top-1=0.7827±0.0534，Top-5=0.9697±0.0247。
-- `Two-stage v1`：MRR=0.8715±0.0257，Top-1=0.7811±0.0407，Top-5=0.9838±0.0064。
-- `v0_2 clean`：MRR=0.8658±0.0142，Top-1=0.7725±0.0111，Top-5=0.9934±0.0029。
-- `v2_2 clean`：MRR=0.8856±0.0423，Top-1=0.8070±0.0675，Top-5=0.9916±0.0100。
-- Event Top-K 已补齐：`v2_2 clean` 的 event Top-3 为 0.9841±0.0000，event Top-5 为 1.0000±0.0000；其他方法见成品表。
-
-### 数据与文件来源
-
-```text
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_2_main_scenario_seed_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_2_main_scenario_seed_summary_with_event_topk.csv
-E:\11.16\script2_new\chapter5_layout_optimization\figures\ch5_fig_5_1_main_scenario_performance_mean_std.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_main_spatial_performance_event_topk.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_learning_level_comparison.png
-```
-
-### 已完成补强
-
-- event Top-3 / event Top-5 成品表已补齐。
-- 主性能图已更新为 clean 双层主线。
 
 ### 禁止越界
 
 - 不用 seed42 单次结果替代多 seed 主结论。
 - 不把 node_holdout 放入主排名。
+- 不把 Two-stage v1 写成”普通规则基线”或本文创新。
 
-## 第5章第5.6节 预算、难点候选与泛化边界分析
+## 第5章第5.5节 预算约束下的性能变化
 
 ### 本节要支撑的表述
 
-预算变化、难点候选、布局相似度和 node_holdout 用于补强机制与边界，而不是推翻主结果。
+不同预算下各方法的性能趋势不同，存在交叉点；低预算时 Embedding-Guided 占优，中高预算时 Two-stage v1 领先。
 
-### 已有事实
+### 可写事实
 
-- `Degree` 的 `far` 候选数量为 17。
-- `Cand-Obs` 和 `Two-stage v1` 的 `far` 候选数量为 1。
-- `Degree N25` 下已定义 17 个 `far` 候选作为 hard candidates 清单。
-- Jaccard 热力图显示 `v0_2 clean` 与 `v2_2 clean` 的节点集合相似度为 0.47，高于二者与人工规则布局的相似度。
-- `node_holdout` 下所有方法整体下降，说明严格未见节点泛化仍是边界。
-
-### 已完成补强
-
-- 预算结构趋势表与图已完成，但只支持结构变化，不支持性能变化结论。
-- direct / near / far 结构堆叠图已完成。
-- hard candidates 定义清单已完成，性能分层仍待逐候选结果。
-- Jaccard 布局相似度已完成。
-- surrogate 可信度散点图已完成。
+- 预算曲线仅 seed42，写趋势不写稳定性。
+- 交叉点：N=5 时 Embedding-Guided 最高（MRR≈0.607），N≥10 时 Two-stage v1 最高。
+- 必须标注”仅 seed 42，趋势参考，不用于稳定性结论”。
 
 ### 数据与文件来源
 
 ```text
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_6_budget_observability_summary.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_7_layout_jaccard_similarity.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_8_surrogate_prediction_quality.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_9_hard_candidate_definition.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\thesis_tables\table_5_4_node_holdout_boundary_seed42.csv
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_budget_observability_curve.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_direct_near_far_stack.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_layout_jaccard_heatmap.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_surrogate_prediction_scatter.png
-E:\11.16\script2_new\chapter5_layout_optimization\figures\fig_ch5_node_holdout_boundary.png
-E:\11.16\thesis_writing_repo\chapters\ch5_experiment_plan.md
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-budget_sweep_seed42.csv
 ```
 
 ### 禁止越界
 
-- 不把 `node_holdout` 写成正式主排名。
-- 不把预算结构趋势写成性能趋势，除非后续补齐训练结果。
+- 不写多 seed 稳定性结论（预算曲线仅 seed 42）。
 
-## 第5章第5.7节 本章小结
+## 第5章第5.6节 机制分析
 
 ### 本节要支撑的表述
 
-第5章可总结为：传统拓扑布局不是定位任务最优；候选可观测性和两阶段平衡布局提供任务驱动规则基线；clean 学习型布局进一步将诊断结果反馈用于节点级价值学习和布局级组合搜索；未见节点泛化和难点候选改善仍需后续补充实验。
+困难观测区域、I/E 缺陷类型适应性、布局相似度分别从可观测性、缺陷类型和布局独立性角度解释方法差异。
+
+### 可写事实
+
+- 5.6.1 困难候选：0 个候选在所有布局下均 far，7 个候选在所有布局下均 near/direct。措辞用”在当前六类布局下，没有候选节点始终处于远距离观测状态”。
+- 5.6.2 I/E 类型：Embedding-Guided 的 I-E gap 最小（0.009），Degree 最大（0.066）。
+- 5.6.3 Jaccard：Embedding-Guided 与所有其他方法的 Jaccard ≤ 0.136，与 Degree 仅 0.042。Node-Feedback 与 Degree 高度重叠（0.563）。
 
 ### 数据与文件来源
 
 ```text
-E:\11.16\thesis_writing_repo\chapters\ch5_experiment_plan.md
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-N25_hard_candidate_analysis.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-N25_by_defect_type_analysis.csv
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-N25_pairwise_jaccard.csv
+```
+
+### 禁止越界
+
+- 不写”没有候选节点天生不可观测”（过度泛化）。
+- 不写 Embedding-Guided “完全独立于候选机制”（应写”不显式依赖候选节点覆盖目标”）。
+
+## 第5章第5.7节 本章小结与局限性
+
+### 本节要支撑的表述
+
+第5章可稳定支持四个主结论和四个局限性。
+
+### 四个主结论
+
+1. 纯拓扑中心性布局不是诊断任务的最优选择（Degree MRR=0.825，显著低于其他方法）。
+2. 覆盖邻近并不是唯一有效策略（Cand-Obs 0.878 低于 Two-stage 0.905 和 Embedding-Guided 0.897）。
+3. 诊断表征能够提供不同于拓扑中心性和邻近覆盖规则的布局依据（Embedding-Guided 三条独立证据）。
+4. 预算敏感性存在交叉点（N=5 时 Embedding-Guided 占优，N≥10 时 Two-stage v1 领先）。
+
+### 四个局限性
+
+1. Node-Feedback 训练数据仅 9 组，布局结构多样性有限。
+2. Two-stage v1 利用全部缺陷场景仿真响应，属于信息充分参考。
+3. 预算曲线仅 seed 42，趋势结论有待多 seed 验证。
+4. 所有实验在同一管网（128 节点）上进行，跨管网泛化性待验证。
+
+### 数据与文件来源
+
+```text
+E:\11.16\thesis_writing_repo\chapters\ch5_layout_optimization.md
 E:\11.16\thesis_writing_repo\notes\evidence_map.md
-E:\11.16\script2_new\chapter5_layout_optimization\docs\CH5_THESIS_MAIN_RESULTS_SEED_SUMMARY_20260413.md
+E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-EXPT_fixed_protocol_N25_main_table.csv
 ```
 
 ### 禁止越界
 
 - 不新增正文没有证明的优势。
 - 不把第5章写成已形成可直接现场部署的最终布点规范。
-
-## 第5章 P2/P3 新增证据状态
-
-### P2 学习型布局生成稳定性
-
-### 可写事实
-
-- `v0_2 clean` 和 `v2_2 clean` 已完成 `layout_seed=1..10`、`N=25` 的布局生成稳定性实验。
-- `v0_2 clean` 的 Jaccard 均值约为 0.8725，`v2_2 clean` 的 Jaccard 均值约为 0.8795。
-- 两种学习型布局的 direct、near、far、mean_hop 和 overlap_count 波动较小，可用于支撑“结构目标较稳定”的表述。
-
-### 数据与文件来源
-
-```text
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_instances.csv
-E:\11.16\script2_new\chapter5_layout_optimization\outputs\layout_stability\layout_structure_summary.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_stability_instances.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_jaccard_pairs.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_node_frequency.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P2_learning_layout_structure_summary.csv
-```
-
-### 禁止越界
-
-- P2 不涉及诊断模型重训，不能写成性能稳定性结论。
-- `layout_seed` 不能与第4章/第5章诊断评价 seed 7、42、123 混写。
-
-### P3 预算性能重训
-
-### 可写事实
-
-- 核心 5 方法预算性能重训清单已生成，共 75 条 scenario split 训练命令。
-- 清单覆盖 `Degree / Cand-Obs / Two-stage v1 / v0_2 clean / v2_2 clean`、预算 `N=5/10/15/20/25` 和诊断 seed 7、42、123。
-- P3 结果整理脚本已生成，当前 75 条 metrics 均为 missing，表示训练尚未完成。
-
-### 数据与文件来源
-
-```text
-E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.csv
-E:\11.16\script2_new\chapter5_layout_optimization\plans\CH5_CORE_BUDGET_PERFORMANCE_MANIFEST.md
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_by_seed.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_performance_summary.csv
-E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-P3_budget_structure_performance_join.csv
-```
-
-### 禁止越界
-
-- 训练未完成前，不能写“预算提升诊断性能”。
-- P3 只包含 scenario split，不包含 node_holdout 主排名。
+- 不对第4章主结果进行反向改写。
