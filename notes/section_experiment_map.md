@@ -119,14 +119,13 @@ E:\11.16\script2_new\scripts\summarize_time_window_length_eval.py
 ```text
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv          — 正式协议多 seed（Degree_N25_formal）
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv    — 正式主结果表（formal_mainline 行）
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_formal_model_comparison_multiseed_summary.csv — 模型结构对比（正式协议）
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_feature_set_comparison.csv        — 特征组合对照（历史 seedset10，标注 HISTORICAL）
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_time_window_length_eval_summary.csv — 窗口长度（旧协议，趋势参考）
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_ie_type_group_summary.csv        — I/E 分组（旧协议，趋势参考）
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_long.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_ie_type_group_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_formal_time_window_length_eval_summary.csv — 窗口长度敏感性（正式协议）
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_formal_ie_type_group_multiseed_summary.csv — I/E 分组（正式协议）
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_model_comparison\CH4_FORMAL_MODEL_COMPARISON_SUMMARY.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_ie_group\CH4_FORMAL_IE_GROUP_SUMMARY.csv
 ```
 
 建议图件：
@@ -134,15 +133,16 @@ E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window
 ```text
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv    — 正式协议三种子，待重绘
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv — 正式主结果，待重绘
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_formal_model_comparison_multiseed_summary.csv — 正式模型结构对比，待重绘
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_feature_set_comparison.csv   — 历史调参依据，标注 HISTORICAL
-E:\11.16\thesis_writing_repo\figures\ch4\data_plots\CH4-F09b_time_window_length_tradeoff.png — 旧协议，趋势参考
-E:\11.16\thesis_writing_repo\figures\ch4\data_plots\CH4-F10a_ie_type_group.png            — 旧协议，趋势参考
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_formal_time_window_length_eval_summary.csv — 正式窗口长度敏感性，待重绘
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_formal_ie_type_group_multiseed_summary.csv — 正式 I/E 分组，待重绘
 ```
 
 数据来源说明：
 
-- F06、F07：来自正式 ie420+normal20 协议，可作为正式证据。
-- F08（特征组合）、F09b（窗口长度）、F10a（I/E 分组）：来自旧 seedset10 数据集或旧协议，标注为历史/趋势参考，不作为正式协议性能表。
+- F06、F07、F08（模型结构）、F09b（窗口长度）、F10a（I/E 分组）：来自正式 ie420+normal20 协议，可作为正式证据。
+- F08h（特征组合）：来自旧 seedset10 数据集，标注为历史调参依据，不作为正式协议性能表。
 
 允许写：
 
@@ -150,9 +150,10 @@ E:\11.16\thesis_writing_repo\figures\ch4\data_plots\CH4-F10a_ie_type_group.png  
 - seed42 主结果（来自 F07 formal_mainline 行）。
 - 窗口级 MRR、Top-K、Active F1、Normal Window FPR、Scene F1。
 - 场景级 Event Top-K。
+- 五类模型结构的正式多种子对比。
 - 特征组合对照（标注为历史调参依据）。
-- 2h/3h/4h/6h 窗口长度对时间段定位和空间定位的影响（标注为旧协议趋势参考）。
-- I/E 分组定位结果（标注为旧协议趋势参考）。
+- 2h/3h/4h/6h 窗口长度对时间段定位和空间定位的影响（正式敏感性分析）。
+- I/E 分组定位结果（正式多种子事后分层统计，不等于类型分类任务）。
 
 不要混入：
 
@@ -172,7 +173,7 @@ node_holdout、direct/near/far 可观测性和 predicted-active 综合诊断分�
 ```text
 E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_nodehold_observability_summary.csv
 E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv
 ```
 
 建议图件：

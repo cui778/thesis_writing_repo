@@ -1,5 +1,9 @@
 # CH5 fixed-protocol N25 main manifest
 
+> Historical pre-run manifest. The formal N25 runs have been completed. Use
+> `CH5-EXPT_fixed_protocol_N25_main_table.csv` and
+> `CH5-EXPT_fixed_protocol_N25_run_report.md` for the current evidence package.
+
 This manifest lists the first strict fixed-protocol runs needed for the Chapter 5 optimization-method main table.
 
 Fixed protocol:

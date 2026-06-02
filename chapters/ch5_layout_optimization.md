@@ -311,7 +311,7 @@
 
 **内部备注**
 
-本章正文采用 5 方法谱系（Degree/Betweenness/Cand-Obs/Two-stage/NF/EG），不含 Surrogate-Search。Two-stage v1 定位为"离线仿真信息充分条件下的任务导向启发式参考"，不作为本文创新。Embedding-Guided 定位为正文主方法，三条独立证据支撑。Node-Feedback 定位为探索性反馈学习方法。所有 mean±std 使用 ddof=1。预算曲线仅 seed42，写趋势不写稳定性。
+本章正文采用 6 方法谱系（Degree/Betweenness/Cand-Obs/Two-stage/NF/EG），不含 Surrogate-Search。Two-stage v1 定位为"离线仿真信息充分条件下的任务导向启发式参考"，不作为本文创新。Embedding-Guided 定位为正文主方法，三条独立证据支撑。Node-Feedback 定位为探索性反馈学习方法。所有 mean±std 使用 ddof=1。预算曲线仅 seed42，写趋势不写稳定性。
 
 源数据文件清单：
 - `CH5-EXPT_fixed_protocol_N25_main_table.csv` — 主表（18行，6方法×3种子）

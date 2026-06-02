@@ -188,7 +188,7 @@ E:\11.16\script2_new\README.md
 - 窗口级 active 指标：Active Accuracy、Active Recall、Active-period Recall、Active F1、Normal Window FPR。
 - 节点定位指标：MRR、Top-1、Top-3、Top-5。
 - 场景级空间定位指标：Event Top-1、Event Top-3、Event Top-5。
-- 场景级活跃期定位指标：onset error、±1/±2/±3 窗口命中、active interval IoU。
+- 场景级活跃期定位指标：onset error、±1/±2/±3 滑动步长命中、active interval IoU。正式实验中滑动步长固定为 1 h。
 - 场景报警级指标：Scene Precision、Scene Recall、Scene FPR、Scene F1。
 - 综合诊断指标：起点命中与节点 Top-K 同时满足的联合指标，作为补充审查。
 
@@ -219,19 +219,31 @@ E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py
   - seed7：MRR=0.8477，Top-1=0.7413，Top-3=0.9443，Top-5=0.9741，Event Top-1=0.7969，Scene F1=1.0000。
   - seed42：MRR=0.8457，Top-1=0.7728，Top-3=0.8973，Top-5=0.9463，Event Top-1=0.8197，Scene F1=0.9917。
   - seed123：MRR=0.7827，Top-1=0.6425，Top-3=0.9161，Top-5=0.9759，Event Top-1=0.6885，Scene F1=1.0000。
-以下特征组合、窗口长度和 I/E 分组结果来自历史探索协议，用于解释正式协议的形成过程或讨论方法边界，不作为当前 `IE420 + normal20` 正式主性能证据。
+- 模型结构正式对比（`IE420 + normal20 / raw_plus_residual / lambda_loc=0.5 / degree_N25 / scenario split / seeds=7,42,123`）：
+  - `gru_only`：MRR=0.2110±0.0092。
+  - `gru_gcn`：MRR=0.2550±0.0116。
+  - `lstm_graphsage_edge`：MRR=0.4664±0.0090。
+  - `hydraulic_inverse`：MRR=0.4269±0.0463。
+  - `hydraulic_inverse_deepattn`：MRR=0.8254±0.0370，Top-1=0.7189，Top-3=0.9192，Normal Window FPR=0.0009。
+  - 可写结论：深层液压注意力模型在统一协议下明显优于纯时序、普通图卷积、边关系建模和单层液压注意力结构。
+以下特征组合结果来自历史探索协议，用于解释正式协议的形成过程，不作为当前 `IE420 + normal20` 正式主性能证据。
 
 - 特征组合对照（历史 seedset10 数据，调参依据，非正式协议性能）：
   - raw_only：MRR=0.2419。
   - residual_only：MRR=0.8082。
   - raw_plus_residual：MRR=0.8290。
-- 窗口长度实验（旧协议数据，趋势参考）：
-  - 2h：onset error=0.7131h，interval IoU=0.9124，窗口 Top-5=0.9303。
-  - 3h：onset error=0.8497h，interval IoU=0.8455，窗口 Top-5=0.9044。
-  - 6h：onset error=2.2151h，interval IoU=0.7226，窗口 Top-5=0.9545。
-- I/E 分组定位（旧协议数据，趋势参考）：
-  - I 类：MRR=0.8076，Top-1=0.6862，Top-5=0.9711。
-  - E 类：MRR=0.7377，Top-1=0.5838，Top-5=0.9224。
+- 窗口长度正式复核（`IE420 + normal20`，seed42，仅改变输入长度，滑动步长固定为 1 h）：
+  - 2h：Active F1=0.9877，Normal FPR=0.0023，MRR=0.8289，Top-1=0.7187，Top-3=0.9302，Top-5=0.9646，onset error=0.7459h，interval IoU=0.9165。
+  - 3h：Active F1=0.9866，Normal FPR=0.0010，MRR=0.8531，Top-1=0.7564，Top-3=0.9435，Top-5=0.9889，onset error=0.7842h，interval IoU=0.8397。
+  - 4h：Active F1=0.9927，Normal FPR=0.0035，MRR=0.8511，Top-1=0.7483，Top-3=0.9541，Top-5=0.9866，onset error=1.5874h，interval IoU=0.8104。
+  - 6h：Active F1=0.9790，Normal FPR=0.0005，MRR=0.8457，Top-1=0.7728，Top-3=0.8973，Top-5=0.9463，onset error=2.1831h，interval IoU=0.7437。
+  - 可写结论：窗口长度影响并非单调；3h/4h 的排序覆盖指标较强，6h 的窗口 Top-1 与误报控制更稳。本文保留 6h 作为第5章固定空间诊断基线，短窗口用于尺度敏感性分析。
+- I/E 分组定位正式复核（`IE420 + normal20`，seeds=7/42/123，按真实缺陷类型事后分层）：
+  - I 类窗口级：MRR=0.8540±0.0312，Top-1=0.7571±0.0607，Top-5=0.9809±0.0103。
+  - E 类窗口级：MRR=0.7885±0.0494，Top-1=0.6693±0.0823，Top-5=0.9463±0.0347。
+  - I 类事件级：Event MRR=0.8788±0.0407，Event Top-1=0.7909±0.0705，Event Top-5=1.0000±0.0000。
+  - E 类事件级：Event MRR=0.8320±0.0535，Event Top-1=0.7391±0.0739，Event Top-5=0.9757±0.0210。
+  - 可写结论：I 类整体定位效果优于 E 类；两类缺陷在 Event Top-5 上均具有较高可用性。该分析不是 I/E 自动分类任务。
 
 ### 数据与文件来源
 
@@ -239,16 +251,16 @@ E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_feature_set_comparison.csv
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_model_comparison_multiseed_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F08_formal_model_comparison_multiseed_summary.csv
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09a_time_boundary_audit_summary.csv
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_time_window_length_eval_summary.csv
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_ie_type_group_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_formal_time_window_length_eval_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_formal_ie_type_group_multiseed_summary.csv
 ```
 
 ### 可写边界
 
 - 6h 是空间定位主基线，用于第5章衔接。
-- 2h/3h 是时间段定位补充分析，不替代第5章空间定位基线。
+- 2h/3h/4h 是输入尺度敏感性分析，不替代第5章固定 6h 空间诊断基线。
 - 时间位置、trend、always_on 等早期结果可放备答，不作为第4章主结果。
 
 ### 禁止越界
@@ -268,14 +280,14 @@ E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_ie_type_group_summ
 - node_holdout 下定位性能明显低于 scenario split，说明严格未见节点泛化仍然困难。
 - direct/near/far 可观测性分层可解释不同候选节点定位难度。
 - 使用预测 active 时间段聚合 node scores 的 scene-level Top-K 更严格，会同时受到时间段选择和节点分数融合影响。
-- 6h predicted-active scene Top-5=0.3175；2h predicted-active scene Top-5=0.1587；该指标不替代 true-active Event Top-K。
+- predicted-active scene Top-K 同时受到时间段恢复与节点分数聚合影响；该指标可作为综合诊断审计，不替代 true-active Event Top-K。
 
 ### 数据与文件来源
 
 ```text
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10b_nodehold_observability_summary.csv
 E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10b_candidate_observability_counts.csv
-E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_time_window_length_eval_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F09b_formal_time_window_length_eval_summary.csv
 ```
 
 ### 禁止越界

@@ -174,13 +174,12 @@ E:\11.16\script2_new\scripts\README.md
 按需读取正式结果表：
 
 ```text
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_summary.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_long.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_ie_type_group_summary.csv
+E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F06_main_model_multiseed.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_model_comparison\CH4_FORMAL_MODEL_COMPARISON_SUMMARY.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_ie_group\CH4_FORMAL_IE_GROUP_SUMMARY.csv
 E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_nodehold_observability_summary.csv
 E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv
-E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv
+E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv
 ```
 
 按需读取图件目录：

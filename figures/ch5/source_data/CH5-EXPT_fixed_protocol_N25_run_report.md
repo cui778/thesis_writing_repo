@@ -1,5 +1,9 @@
 # 第五章 fixed protocol N25 主实验运行报告
 
+> **历史执行记录。** 本文件记录正式主表生成前的运行安排，不再表示当前仍有实验缺失。
+> 当前正式结果请以 `CH5-EXPT_fixed_protocol_N25_main_table.csv` 为准；未完成清单
+> `CH5-EXPT_fixed_protocol_missing_main_runs.csv` 现已为空。
+
 ## 1. 实验目的
 
 本轮实验用于把第五章布局优化方法重新对齐到第4章最新固定诊断协议。
@@ -255,4 +259,3 @@ E:\11.16\thesis_writing_repo\figures\ch5\source_data\CH5-EXPT_fixed_protocol_mis
 ```
 
 若任一 JSON 缺失或不可读，该方法不进入正式主表。
-

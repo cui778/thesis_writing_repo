@@ -142,9 +142,9 @@ pred_active(t) = 0, otherwise
 | 指标 | 计算来源 | 含义 |
 |---|---|---|
 | `onset_error_hours_mean` | 预测起点 vs 真实起点 | 平均起点误差 |
-| `onset_accuracy_within_1_window` | 起点误差是否小于等于 1 个窗口步长 | 较严格起点命中 |
-| `onset_accuracy_within_2_windows` | 起点误差是否小于等于 2 个窗口步长 | 中等宽松起点命中 |
-| `onset_accuracy_within_3_windows` | 起点误差是否小于等于 3 个窗口步长 | 粗粒度起点命中 |
+| `onset_accuracy_within_1_stride` | 起点误差是否小于等于 1 个滑动步长 | 较严格起点命中 |
+| `onset_accuracy_within_2_strides` | 起点误差是否小于等于 2 个滑动步长 | 中等宽松起点命中 |
+| `onset_accuracy_within_3_strides` | 起点误差是否小于等于 3 个滑动步长 | 粗粒度起点命中 |
 | `active_interval_iou_mean` | 预测 active 区间与真实 active 区间 | 时间段整体重叠程度 |
 | `duration_error_hours_mean` | 预测持续时间 vs 真实持续时间 | 持续时间误差 |
 
@@ -325,9 +325,9 @@ scene_score = mean(top_k(p_active(t)))
 | 指标 | 含义 | 推荐程度 |
 |---|---|---|
 | `onset_error_hours_mean` | 预测起点与真实起点的平均小时误差 | 主文 |
-| `onset_accuracy_within_1_window` | 起点落在真实起点 ±1 个窗口步长内 | 主文 |
-| `onset_accuracy_within_2_windows` | 起点落在真实起点 ±2 个窗口步长内 | 主文或补充 |
-| `onset_accuracy_within_3_windows` | 起点落在真实起点 ±3 个窗口步长内 | 适合粗粒度说明 |
+| `onset_accuracy_within_1_stride` | 起点落在真实起点 ±1 个滑动步长内 | 主文 |
+| `onset_accuracy_within_2_strides` | 起点落在真实起点 ±2 个滑动步长内 | 主文或补充 |
+| `onset_accuracy_within_3_strides` | 起点落在真实起点 ±3 个滑动步长内 | 适合粗粒度说明 |
 | `active_interval_iou_mean` | 预测 active 区间与真实区间的 IoU | 主文 |
 
 附表或备答指标：
@@ -343,12 +343,12 @@ scene_score = mean(top_k(p_active(t)))
 对应代码：
 
 - `E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py`
-- `E:\11.16\script2_new\scripts\summarize_time_window_length_eval.py`
+- `E:\11.16\script2_new\chapter4_diagnosis_model\scripts\run_ch4_formal_sensitivity.py`
 
 对应结果：
 
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\CH4_TIME_WINDOW_LENGTH_EVAL_SUMMARY.md`
+- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv`
+- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_AUDIT.md`
 
 ### 3.4 场景级空间定位
 
@@ -385,7 +385,7 @@ true active 聚合主要衡量空间定位能力；predicted active 聚合同时
 对应结果：
 
 - true active 聚合：`E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv`
-- predicted active 聚合：`E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\time_window_length_eval\chapter4_time_window_length_eval_summary.csv`
+- predicted active 聚合：`E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv`
 
 ### 3.5 场景级综合诊断
 
@@ -399,9 +399,9 @@ true active 聚合主要衡量空间定位能力；predicted active 聚合同时
 
 | 指标 | 含义 | 论文用途 |
 |---|---|---|
-| `onset_within_1_window_and_node_top3` | 起点在 ±1 窗口内且节点进入 Top-3 | 严格综合审查 |
-| `onset_within_2_windows_and_node_top5` | 起点在 ±2 窗口内且节点进入 Top-5 | 综合诊断审查 |
-| `onset_within_3_windows_and_node_top5` | 起点在 ±3 窗口内且节点进入 Top-5 | 粗粒度综合诊断 |
+| `onset_within_1_stride_and_node_top3` | 起点在 ±1 滑动步长内且节点进入 Top-3 | 严格综合审查 |
+| `onset_within_2_strides_and_node_top5` | 起点在 ±2 滑动步长内且节点进入 Top-5 | 综合诊断审查 |
+| `onset_within_3_strides_and_node_top5` | 起点在 ±3 滑动步长内且节点进入 Top-5 | 粗粒度综合诊断 |
 
 这类指标更接近完整工程流程，但会同时受到 active 段预测、窗口长度、节点分数聚合方式影响。因此正文可作为补充说明，不建议替代主实验中的 MRR、Top-K 和 Event Top-K。
 
@@ -417,8 +417,8 @@ true active 聚合主要衡量空间定位能力；predicted active 聚合同时
 
 对应结果：
 
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_ie_type_group_summary.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_ie_type_group.png`
+- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_ie_group\CH4_FORMAL_IE_GROUP_SUMMARY.csv`
+- `E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_formal_ie_type_group_multiseed_summary.csv`
 
 ### 3.7 泛化边界与可观测性分析
 

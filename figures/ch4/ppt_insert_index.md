@@ -6,6 +6,9 @@
 |---|---|---|---|---|
 | Slide 4-6 | CH4-F06 | 多 seed 稳定性结果（正式协议） | 源数据已回填，待重绘 | `source_data/CH4-F06_main_model_multiseed.csv` |
 | Slide 4-6/4-7 | CH4-F07 | IE420+normal20 主诊断结果表 | 源数据就绪，待重绘 | `source_data/CH4-F07_task_level_results_summary.csv` |
+| Slide 4-8 | CH4-F08 | 模型结构多 seed 对比图 | 源数据就绪，待重绘 | `source_data/CH4-F08_formal_model_comparison_multiseed_summary.csv` |
+| Slide 4-9 | CH4-F09b | 窗口长度敏感性图 | 源数据就绪，待重绘 | `source_data/CH4-F09b_formal_time_window_length_eval_summary.csv` |
+| Slide 4-10 | CH4-F10a | I/E 类型分组定位结果图 | 源数据就绪，待重绘 | `source_data/CH4-F10a_formal_ie_type_group_multiseed_summary.csv` |
 
 ## 历史证据图（来自旧 seedset10 或旧协议）
 
@@ -13,10 +16,8 @@
 
 | PPT页 | 推荐图号 | 图名 | 当前状态 | 说明 |
 |---|---|---|---|---|
-| Slide 4-8 | CH4-F08 | 特征组合对照结果图 | 历史 - seedset10 数据集 | 调参依据（raw vs residual 选择） |
+| 备答 | CH4-F08h | 特征组合对照结果图 | 历史 - seedset10 数据集 | 调参依据（raw vs residual 选择） |
 | 备答 | CH4-F09a | 场景级时间边界审查图 | 历史 - 旧协议 | 备答或正文小节 |
-| Slide 4-9 | CH4-F09b | 窗口长度影响图 | 历史 - 旧协议 | 窗口尺度差异说明 |
-| Slide 4-10 | CH4-F10a | I/E 类型分组定位结果图 | 历史 - 旧协议 | 分组定位分析备查 |
 | Slide 4-10 | CH4-F10b | 可观测性分析图 | 历史 - 旧协议 | 候选节点机制备查 |
 
 ## 示意图（无数据来源争议）

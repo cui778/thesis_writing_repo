@@ -79,16 +79,16 @@ lambda_loc：0.5
 |---|---|---|---|
 | CH4-F06 | `figures/ch4/source_data/CH4-F06_main_model_multiseed.csv` | data_ready | 正式 normal20 |
 | CH4-F07 | `figures/ch4/source_data/CH4-F07_task_level_results_summary.csv` | data_ready | 正式 normal20（formal_mainline 行）|
-| CH4-F08 | `figures/ch4/source_data/CH4-F08_feature_set_comparison.csv` | historical | 旧 seedset10，调参依据 |
+| CH4-F08 | `figures/ch4/source_data/CH4-F08_formal_model_comparison_multiseed_summary.csv` | data_ready | 正式 normal20；模型结构多 seed 对比 |
+| CH4-F08h | `figures/ch4/source_data/CH4-F08_feature_set_comparison.csv` | historical | 旧 seedset10，调参依据 |
 | CH4-F09a | `figures/ch4/source_data/CH4-F09a_time_boundary_audit_summary.csv` | historical | 旧协议 |
-| CH4-F09b | `figures/ch4/source_data/CH4-F09b_time_window_length_eval_summary.csv` | historical | 旧协议 |
-| CH4-F10a | `figures/ch4/source_data/CH4-F10a_ie_type_group_summary.csv` | historical | 旧协议 |
+| CH4-F09b | `figures/ch4/source_data/CH4-F09b_formal_time_window_length_eval_summary.csv` | data_ready | 正式 normal20；窗口长度敏感性 |
+| CH4-F10a | `figures/ch4/source_data/CH4-F10a_formal_ie_type_group_multiseed_summary.csv` | data_ready | 正式 normal20；I/E 类型分组定位 |
 | CH4-F10b | `figures/ch4/source_data/CH4-F10b_nodehold_observability_summary.csv` | historical | 旧协议 |
 
 ### 非正式实验（不放主结论）
 
 - node_holdout：泛化压力测试
-- model_comparison：模型消融
 - lambda sweep / feature ablation：来自旧 seedset10，调参依据
 - persistent / mixed / process_diagnosis：legacy
 
@@ -166,7 +166,7 @@ lambda_loc：0.5
 | 章节 | 正式图源数 | 历史图源 | 待截图 | 待绘图 |
 |---|---|---|---|---|
 | Ch3 | 6 CSV | 0 | 1 (S01) | F01-F06 的 PNG |
-| Ch4 | 2 formal CSV + 5 historical CSV | 已归档至 legacy_old_protocol/ | 1 (S01) | F06,F07 待重绘 |
+| Ch4 | 5 formal CSV + 3 historical CSV | 已归档至 legacy_old_protocol/ | 1 (S01) | F06-F10a 待重绘 |
 | Ch5 | 6 CSV | 已归档至 legacy_old_protocol/ 和 legacy_old_pipeline/ | 0 | 主表待绘图 |
 
 ---

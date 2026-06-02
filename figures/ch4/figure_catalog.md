@@ -17,12 +17,33 @@
 - `formal_mainline` 行为正式主结果（seed42, MRR=0.8457）
 - `historical_multiseed`、`strict_generalization`、`time_dimension` 行为历史/备查数据
 
+### CH4-F08 模型结构多 seed 对比图（正式协议）
+
+源数据：`source_data/CH4-F08_formal_model_comparison_multiseed_summary.csv`
+
+- 来源：`ie420_plus_normal20_v1 / raw_plus_residual / lambda_loc=0.5 / degree_N25 / scenario split / seeds=7,42,123`
+- 用途：展示从纯时序、通用图模型、边关系建模到深层液压注意力模型的结构递进
+
+### CH4-F09b 窗口长度敏感性图（正式协议）
+
+源数据：`source_data/CH4-F09b_formal_time_window_length_eval_summary.csv`
+
+- 来源：正式 normal20 协议，seed42，仅改变输入窗口长度
+- 用途：说明输入尺度对检测、排序定位和粗粒度时间恢复的影响
+
+### CH4-F10a I/E 类型分组定位结果图（正式协议）
+
+源数据：`source_data/CH4-F10a_formal_ie_type_group_multiseed_summary.csv`
+
+- 来源：正式 normal20 协议，种子 7/42/123
+- 用途：按真实缺陷类型事后分层统计窗口级和事件级定位表现，不表示自动类型分类
+
 ## 历史证据图（来自旧 seedset10 数据集或旧协议）
 
 > 以下图源均来自 `ie420_plus_normal_multibaseline_v1_seedset10` 或旧 scenario split 协议，
 > 不属于正式 `ie420_plus_normal20_v1` 协议。保留为调参依据记录或答辩备查。
 
-### CH4-F08 特征组合对照结果图（历史）
+### CH4-F08h 特征组合对照结果图（历史）
 
 源数据：`source_data/CH4-F08_feature_set_comparison.csv`
 
@@ -35,20 +56,6 @@
 
 - 来源：旧协议数据
 - 用途：备答或正文小节
-
-### CH4-F09b 窗口长度影响图（历史）
-
-源数据：`source_data/CH4-F09b_time_window_length_eval_summary.csv`
-
-- 来源：旧协议数据（seed42, MRR=0.7933 为旧协议值）
-- 用途：解释 6h 与短窗口的任务尺度差异
-
-### CH4-F10a I/E 类型分组定位结果图（历史）
-
-源数据：`source_data/CH4-F10a_ie_type_group_summary.csv`
-
-- 来源：旧协议（`last_run_metrics_ch1_fullgraph_degree_ie420_s*_fix1.json`）
-- 用途：分组定位分析备查
 
 ### CH4-F10b 可观测性分析图（历史）
 
@@ -80,6 +87,8 @@
 
 `legacy_old_protocol/` 目录下保存已替换的旧版数据：
 - `CH4-F06_main_model_multiseed_OLD.csv` — 旧协议多 seed 数据
+- `CH4-F09b_time_window_length_eval_summary.csv` — 旧协议窗口长度结果
+- `CH4-F10a_ie_type_group_summary.csv` — 旧协议 I/E 分组结果
 
 ## 需要你截图的图
 
