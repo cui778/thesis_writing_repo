@@ -1,0 +1,8 @@
+﻿check,expected,actual
+dataset_type,ie420_plus_normal20,ie420_plus_normal20
+persistent_count,0,0
+node_id,auto_selected_by_residual_signal,HS1306571
+I_scenario,formal_matrix,136
+E_scenario,formal_matrix,253
+normal_scenarios,20,20
+rows_extracted,22 scenarios x 287,6314

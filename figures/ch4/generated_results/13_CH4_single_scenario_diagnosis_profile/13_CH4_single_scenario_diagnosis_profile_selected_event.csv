@@ -1,0 +1,2 @@
+﻿scenario_id,defect_type,true_has_defect,pred_has_defect,true_start,true_end,pred_start,pred_end,onset_error_hours,signed_onset_error_hours,active_interval_iou,duration_error_hours,false_alarm_before_start,true_node_id,pred_top_node_id,pred_true_node_rank,true_active_top_node_id,true_active_true_node_rank,n_windows,n_pred_active_windows,n_true_active_windows
+316,E,1,1,2025-01-01 00:00:00,2025-01-01 18:00:00,2025-01-01 00:10:00,2025-01-01 19:00:00,0.1666666666666666,0.1666666666666666,0.9385964912280702,0.8333333333333334,0,HS1313597,HS1313597,1.0,HS1313597,1.0,45,17,17

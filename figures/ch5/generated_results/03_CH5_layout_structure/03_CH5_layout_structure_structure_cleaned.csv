@@ -1,0 +1,7 @@
+method,direct,near,far,overlap_count,mean_hop,max_hop,monitor_dispersion_mean_hop,method_clean
+Degree,12,21,17,12,3.48,15.0,9.78,Degree
+Betweenness,11,16,23,11,3.56,15.0,9.606666666666667,Betweenness
+Cand-Obs,15,34,1,15,0.94,3.0,12.526666666666667,Cand-Obs
+Two-stage v1,18,31,1,18,0.92,4.0,13.823333333333334,Two-stage v1
+Node-Feedback,13,26,11,13,1.44,5.0,11.056666666666668,Node-Feedback
+Embedding-Guided,10,21,19,10,2.56,15.0,12.756666666666666,Embedding-Guided

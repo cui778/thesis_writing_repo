@@ -1,0 +1,4 @@
+interface:
+  display_name: "Chinese Engineering Thesis Writing"
+  short_description: "Evidence-grounded Chinese engineering thesis drafting"
+  default_prompt: "Use $chinese-engineering-thesis-writing to plan and draft one evidence-grounded thesis section."

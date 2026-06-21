@@ -1,0 +1,9 @@
+﻿check,expected,actual,status
+dataset_type,ie420_plus_normal20,ie420_plus_normal20,pass
+scenario_count,441,441,pass
+persistent_count,0,0,pass
+defect_rows,420,420,pass
+I_count,250,250,pass
+E_count,170,170,pass
+I_nodes,50,50,pass
+E_nodes,34,34,pass

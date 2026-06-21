@@ -1,472 +1,168 @@
-# 第4章任务定义与评估指标说明
+# 第4章诊断任务、输出与评价指标统一说明
 
-本文档用于统一第4章“任务链、标签、指标和结果文件”的口径。正文中可择要引用，本文件更适合作为写作备查、PPT 备注和答辩问答依据。
+本文档用于固定第4章及第5章沿用的诊断任务、模型输出、聚合方式和评价指标。正式正文以 `ch4_model_diagnosis.md` 为准，本文件作为公式、表格、图注和答辩问答的统一口径。
 
-## 1. 总体任务链
-
-第4章面向连续 I/E 缺陷场景，并使用无缺陷正常工况层约束正常波动下的误报，采用如下诊断链：
+## 1. 正式实验协议
 
 ```text
-无缺陷正常工况层 + IE420 缺陷场景
-→ 滑动窗口样本构建
-→ 窗口级诊断证据提取
-→ 场景级报警判断
-→ 场景级活跃期定位
-→ 场景级空间定位
-→ 场景级综合诊断
-→ 泛化边界与可观测性分析
+dataset      = ie420_plus_normal20_v1
+defect matrix= defect_matrix_diverse_ie_v4_formal_conservative420_seed42.csv
+layout       = degree_N25
+feature_set  = raw_plus_residual
+split        = scenario split
+lambda_loc   = 0.5
+window       = sequence_length 36 / stride 6
+seeds        = 7, 42, 123
+main model   = DeepAttn-L3
 ```
 
-该链条的核心不是把所有问题都混成一个指标，而是基于同一组窗口级输出，分层回答四类工程问题：
+`ie420_plus_normal20_v1` 共包含 441 个场景：1 个 reference、420 个 time-gated I/E 缺陷场景和 20 个 normal 扰动场景。reference 用于 residual 对齐；normal20 用于描述无缺陷波动并约束误报；IE420 用于提供缺陷类型、位置和 active 区间标签。不得将 persistent、fulltime、legacy 或 seedset10 数据混入正式结果。
 
-| 问题 | 对应任务 | 输出 |
+## 2. 节点集合与输入边界
+
+| 集合 | 含义 | 数量 | 作用 |
+|---|---|---:|---|
+| \(V\) | 全网节点集合 | 128 | 保留完整管网拓扑 |
+| \(S\) | 监测节点集合 | 25 | 提供可见动态观测 |
+| \(C\) | 缺陷节点定位集合 | 50 | 模型空间排序范围 |
+| \(d\) | 单个场景的真实缺陷节点 | 1 | 空间定位标签 |
+
+正式输入采用 full-graph sparse-observation 协议。全网拓扑始终保留，仅 \(S\) 中节点的动态特征可见，其他节点通过 observed mask 标记为未观测。第4章固定 Degree-N25；第5章固定诊断模型与数据协议，仅改变 \(S\)。
+
+## 3. 正式任务链
+
+```text
+连续场景
+-> 滑动窗口
+-> p_active(t) + node_scores(t)
+-> 场景级报警与活跃区间
+-> 场景级缺陷节点排序
+```
+
+第4章的直接模型输出只有两类正式诊断证据：
+
+| 窗口输出 | 含义 | 后续用途 |
 |---|---|---|
-| 当前窗口是否存在缺陷响应 | 窗口级 active 识别 | `p_active(t)` |
-| 48 h观测窗口是否需要报警 | 场景级报警判断 | `has_defect` |
-| 缺陷大致发生在哪段时间 | 场景级活跃期定位 | 预测 active 时间段 |
-| 缺陷更可能位于哪里 | 窗口级/场景级节点定位 | 候选节点 Top-K |
+| `p_active(t)` | 当前窗口存在缺陷活跃响应的概率 | 窗口识别、场景报警、active 区间恢复 |
+| `node_scores(t)` | 当前窗口内各缺陷节点的定位分数 | 窗口排序、事件级节点排序 |
 
-其中，窗口级 active 识别和节点分数是模型直接输出的证据；场景级报警、场景级活跃期定位和场景级空间定位均是对窗口证据的聚合结果。换言之，任务层级是诊断结果的组织方式，不是多个彼此独立的模型头。
+场景级报警、时间定位和 Event Top-K 均为窗口输出的聚合结果，不是三个独立模型头。
 
-## 2. 数据、标签与输入协议
+模型代码保留 `logits_defect_type`，但正式训练设置 `lambda_type=0.0`。因此，本文没有完成 I/E 自动分类任务；I/E 结果仅表示按真实类型对定位指标进行分组统计。
 
-### 2.1 数据来源
+## 4. 滑动窗口与标签
 
-正式诊断数据由两层组成。第一层为无缺陷正常工况层，包括用于残差对齐的reference响应，以及用于表征正常运行波动的normal20扰动场景；第二层为第3章生成的 IE420 time-gated 缺陷场景，用于提供I/E缺陷活跃窗口和节点定位标签。time-gated 表示每个缺陷场景具有 `start_hour` 和 `duration_h`，缺陷只在场景内某一时间段激活。由此，reference、normal与IE420不是并列的三类任务，而是“无缺陷正常工况层”和“缺陷响应层”两个数据层级：前者服务于残差构造与误报控制，后者服务于检测、时间段恢复和节点定位。
-
-48 h是统一观测窗口和评价窗口，而不是对缺陷寿命的假设。每个场景均在相同长度的观测窗口内输出时序数据，模型再通过滑动窗口构造样本；缺陷是否发生、何时开始和持续多久仍由缺陷矩阵中的`start_hour`和`duration_h`定义。
-
-### 2.2 滑动窗口
-
-正式空间定位基线使用：
-
-| 参数 | 数值 | 含义 |
-|---|---:|---|
-| sampling interval | 10 min | 原始时序采样间隔 |
-| `sequence_length` | 36 | 每个输入窗口约 6 h |
-| `window_stride` | 6 | 每约 1 h 形成一个窗口判断点 |
-
-窗口长度影响实验另外比较 `sequence_length=12/18/24/36`，对应约 2h/3h/4h/6h，`window_stride` 均固定为 6。
-
-### 2.3 标签
+采样间隔为 10 min。正式窗口 `sequence_length=36`，覆盖约 6 h；`window_stride=6`，约每 1 h 产生一个窗口判断点。
 
 | 标签 | 来源 | 用途 |
 |---|---|---|
-| `active_label` | 窗口与真实 active 时段的 overlap ratio | 训练窗口级 active 识别 |
-| `target_node_idx` | 缺陷矩阵中的真实缺陷节点 | 训练和评价节点定位 |
-| `start_hour` | 缺陷矩阵 | 场景级活跃期起点评价 |
-| `duration_h` | 缺陷矩阵 | 场景级活跃区间评价 |
-| `defect_type` | 缺陷矩阵中的 I/E 类型 | I/E 分组统计分析 |
+| `active_label` | 窗口与真实 active 区间的重叠关系 | active 识别 |
+| `target_node_idx` | 缺陷矩阵中的真实缺陷节点 | 节点定位 |
+| `start_hour` | 正式缺陷矩阵 | 起点误差 |
+| `duration_h` | 正式缺陷矩阵 | 区间 IoU |
+| `defect_type` | 正式缺陷矩阵 | I/E 补充分组 |
 
-### 2.4 输入协议
+48 h 是统一观察窗口，不表示缺陷持续 48 h。缺陷仅在 `[start_hour, start_hour + duration_h)` 内生效。
 
-正式训练入口为：
+## 5. 窗口级评价
 
-`E:\11.16\script2_new\scripts\train_privileged_teacher_student.py`
+### 5.1 Active 识别
 
-正式协议为 full-graph sparse-observation：
+由 `logits_has_defect` 经 softmax 得到：
 
-- 保留 128 节点完整拓扑；
-- 保留 observed mask，使模型知道哪些节点有传感器；
-- 非观测节点的节点特征不作为可见动态观测；
-- 定位输出限制在 50 个候选缺陷节点空间。
-
-## 3. 任务与指标
-
-### 3.0 模型输出头到评价指标的计算链条
-
-第4章模型代码前向输出包含三个头：
-
-| 输出头 | 张量含义 | 直接解释 | 当前正式用途 |
-|---|---|---|---|
-| `logits_has_defect` | 图级/窗口级二分类 logits | 当前窗口是否存在缺陷活跃响应 | active 识别、场景级活跃期定位 |
-| `logits_node` | 节点级二分类 logits | 每个节点作为缺陷节点的得分 | 窗口级节点定位、场景级空间定位 |
-| `logits_defect_type` | 图级三分类 logits | 缺陷类型相关输出 | 当前不进入正式主指标，仅保留为结构输出 |
-
-这三个输出头并不是分别对应三个完整论文任务。正式任务链主要使用前两个输出头：
-
-```text
-logits_has_defect
-→ softmax 得到 p_active(t)
-→ 窗口级 active 识别
-→ 按 scenario_id 和窗口时间排序
-→ 场景级活跃期定位
-→ onset error / ±k窗口命中 / interval IoU
-
-logits_node
-→ 取缺陷类 logit 或 softmax 分数作为 node_scores(t)
-→ candidate_mask 限制到 C=50 候选节点
-→ 窗口级 MRR / Top-K
-→ 在场景内聚合窗口 node_scores(t)
-→ Event Top-K / scene-level Top-K
-```
-
-`logits_defect_type` 的代码输出维度为 3，可对应类型相关表征；但正式训练入口中 `lambda_type=0.0`，类型头不作为正式监督损失。因此，第4章正文不把 I/E 类型自动分类写成已完成任务。当前 I/E 结果来自按真实 `defect_type` 对定位指标做分组统计，而不是根据 `logits_defect_type` 评价分类准确率。
-
-因此，论文正文中可将正式模型输出概括为两类窗口级证据：
-
-```text
-detect output    -> p_active(t)
-candidate output -> node_scores(t)
-```
-
-场景级报警、时间段定位、空间定位和综合诊断都由上述两类窗口级证据聚合得到。
-
-#### 3.0.1 `logits_has_defect` 如何得到 active 与时间段指标
-
-对每个窗口，模型输出 `logits_has_defect=[logit_inactive, logit_active]`。通过 softmax 得到：
-
-```text
-p_active(t) = softmax(logits_has_defect)[active_class]
-```
-
-窗口级 active 识别的计算方式为：
-
-```text
-pred_active(t) = 1, if p_active(t) >= threshold
-pred_active(t) = 0, otherwise
-```
-
-其中 threshold 通常取 0.5。将 `pred_active(t)` 与窗口真实 `active_label` 比较，得到 Active Accuracy、Active Recall 等窗口级指标。
-
-场景级活跃期定位的计算方式为：
-
-1. 按 `scenario_id` 对窗口分组。
-2. 在每个场景内按 `window_start_time` 排序。
-3. 得到该场景的 `p_active(t)` 时间序列。
-4. 根据阈值和连续窗口规则得到预测 active 区间。
-5. 将预测 active 区间与真实 `start_hour`、`duration_h` 对应的 active 区间比较。
-
-由此得到：
-
-| 指标 | 计算来源 | 含义 |
-|---|---|---|
-| `onset_error_hours_mean` | 预测起点 vs 真实起点 | 平均起点误差 |
-| `onset_accuracy_within_1_stride` | 起点误差是否小于等于 1 个滑动步长 | 较严格起点命中 |
-| `onset_accuracy_within_2_strides` | 起点误差是否小于等于 2 个滑动步长 | 中等宽松起点命中 |
-| `onset_accuracy_within_3_strides` | 起点误差是否小于等于 3 个滑动步长 | 粗粒度起点命中 |
-| `active_interval_iou_mean` | 预测 active 区间与真实 active 区间 | 时间段整体重叠程度 |
-| `duration_error_hours_mean` | 预测持续时间 vs 真实持续时间 | 持续时间误差 |
-
-因此，`logits_has_defect` 的作用不仅是回答“这个窗口有没有缺陷”，也为“整条场景中缺陷大致发生在哪段时间”提供时间证据。
-
-#### 3.0.2 `logits_node` 如何得到节点定位指标
-
-对每个窗口，模型输出 `logits_node`，形状可理解为：
-
-```text
-[batch_size, num_nodes, 2]
-```
-
-其中第 2 类通常表示“该节点为缺陷节点”的分数。评价时取：
-
-```text
-node_scores(t, i) = logits_node[t, i, defect_class]
-```
-
-再使用 `candidate_mask` 将排序空间限制到 50 个候选节点 `C`：
-
-```text
-只在 C=50 候选节点内排序 node_scores(t, i)
-```
-
-窗口级节点定位指标计算方式为：
-
-1. 仅对真实 active 窗口评价节点定位。
-2. 在 50 个候选节点内按 `node_scores(t, i)` 从高到低排序。
-3. 找到真实缺陷节点 `target_node_idx` 的排名。
-4. 根据排名计算 MRR、Top-1、Top-3、Top-5。
-
-对应关系为：
-
-| 指标 | 计算方式 | 工程含义 |
-|---|---|---|
-| MRR | 真实节点排名倒数的平均值 | 排序整体质量 |
-| Top-1 | 真实节点排名是否为第 1 | 精确定位 |
-| Top-3 | 真实节点是否进入前 3 | 小范围排查 |
-| Top-5 | 真实节点是否进入前 5 | 候选清单可用性 |
-
-场景级空间定位进一步将同一 `scenario_id` 下多个窗口的 `node_scores(t)` 聚合：
-
-```text
-scene_score(i) = aggregate_t node_scores(t, i)
-```
-
-聚合窗口可以有两种来源：
-
-| 聚合窗口 | 来源 | 指标含义 |
-|---|---|---|
-| 真实 active 窗口 | 使用标签确定 active 窗口 | 衡量空间定位能力，即 Event Top-K |
-| 预测 active 窗口 | 使用 `p_active(t)` 预测 active 区间 | 衡量完整综合诊断能力 |
-
-使用真实 active 窗口聚合时，得到 Event Top-1、Event Top-3、Event Top-5，是第4章空间定位主结果。使用预测 active 窗口聚合时，得到 predicted-active scene Top-K，同时受到时间段定位和节点分数聚合影响，作为综合诊断审查指标。
-
-#### 3.0.3 `logits_defect_type` 的当前作用
-
-模型结构中存在 `logits_defect_type`，可输出图级三分类类型相关 logits。代码层面该头可以服务于 I/E/P 类型相关建模或 type-conditioned node head。
-
-但当前正式训练配置中：
-
-```text
-lambda_type = 0.0
-```
-
-这意味着类型头不参与正式类型分类监督损失，第4章也没有以 `logits_defect_type` 计算 Type Accuracy、Type F1 等正式分类指标。因此，当前论文中涉及 I/E 的结果应表述为：
-
-```text
-按真实 I/E 类型对节点定位指标进行分组统计。
-```
-
-而不应表述为：
-
-```text
-模型完成了 I/E 类型分类。
-```
-
-如果后续要把 I/E 类型判断作为正式任务，需要补充：
-
-1. 启用类型分类损失，例如设置 `lambda_type > 0`。
-2. 明确类型标签空间，例如 I/E 二分类，或 baseline/I/E 三分类。
-3. 报告 Type Accuracy、Macro-F1、I/E 混淆矩阵。
-4. 说明类型判断与节点定位之间是并行多任务还是两阶段诊断。
-
-### 3.1 窗口级 active 识别
-
-任务问题：给定一个滑动窗口，判断该窗口是否存在缺陷活跃响应。
-
-输入：一个窗口的稀疏观测时空图。
-
-输出：`p_active(t)` 或 active/inactive 分类结果。
-
-主要标签：`active_label`。
+\[
+p_{\mathrm{active}}(t)
+=\operatorname{softmax}(\mathbf{z}^{active}_t)_1.
+\]
 
 主要指标：
 
-| 指标 | 含义 | 论文用途 |
+- Active F1：active 与 inactive 窗口的综合识别质量；
+- Active Recall：真实 active 窗口的检出率；
+- Normal Window FPR：normal20 窗口被误判为 active 的比例。
+
+Normal Window FPR 是误报控制指标，不与 Scene FPR 混用。
+
+### 5.2 缺陷节点排序
+
+对 50 个缺陷节点的 `node_scores(t)` 降序排列，设真实节点在第 \(i\) 个 active 窗口中的排名为 \(r_i\)，则：
+
+\[
+\mathrm{MRR}
+=\frac{1}{N_{\mathrm{active}}}
+\sum_{i=1}^{N_{\mathrm{active}}}\frac{1}{r_i}.
+\]
+
+| 指标 | 含义 | 正文地位 |
 |---|---|---|
-| Active Accuracy | 窗口 active/inactive 分类准确率 | 说明窗口证据提取能力 |
-| Active Recall | 真实 active 窗口被识别出的比例 | 说明缺陷响应覆盖能力 |
-| Active-period Recall | 从过程角度统计 active 阶段覆盖情况 | 支撑后续时间和空间聚合 |
+| MRR | 真实节点平均前位排序质量 | 核心指标 |
+| Top-1 | 真实节点位于首位的比例 | 核心指标 |
+| Top-3 | 真实节点进入前三的比例 | 核心指标 |
+| Top-5 | 真实节点进入前五的比例 | 补充；部分实验接近饱和 |
 
-对应代码：
+## 6. 场景级评价
 
-- `E:\11.16\script2_new\utils\evaluation.py`
-- `E:\11.16\script2_new\scripts\train_privileged_teacher_student.py`
+### 6.1 场景报警
 
-对应结果：
+将同一 `scenario_id` 的窗口概率按 `top-k mean` 等规则聚合得到场景分数，用于计算 Scene Recall、Scene FPR 和 Scene F1。该组指标评价完整场景是否需要报警。
 
-- `E:\11.16\script2_new\outputs\reports\last_run_metrics_*.json`
-- `E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F07_task_level_results_summary.csv`
+### 6.2 活跃区间恢复
 
-### 3.1b 场景级报警判断
+将窗口按时间排序，以 `p_active(t)` 阈值和连续窗口规则恢复预测区间。主要指标为：
 
-任务问题：给定一条完整48 h观测窗口，判断该场景是否存在缺陷响应。
-
-输入：同一 `scenario_id` 下按时间排序的窗口级 `p_active(t)`。
-
-输出：场景级 `has_defect` 判断。
-
-常用聚合方式：
-
-```text
-scene_score = mean(top_k(p_active(t)))
-```
-
-主实验默认采用 `top_k` 聚合，避免单个偶发高分窗口直接决定场景报警结果。场景级指标包括：
-
-| 指标 | 含义 | 论文用途 |
+| 指标 | 定义 | 含义 |
 |---|---|---|
-| Scene Recall | 缺陷场景被正确报警的比例 | 说明缺陷场景检出能力 |
-| Scene FPR | 无缺陷场景被误报为缺陷的比例 | 说明正常波动下的误报控制 |
-| Scene F1 | 场景级报警综合指标 | 连接窗口证据与工程报警 |
+| Onset error | 预测起点与真实起点的小时差 | 起点定位误差 |
+| Onset within \(k\) strides | 起点误差是否不超过 \(k\) 个步长 | 粗粒度起点命中 |
+| Active IoU | 预测区间与真实区间交并比 | 整体时间覆盖质量 |
 
-场景级报警与窗口级 active 识别使用同一组 `p_active(t)`，区别在于前者面向完整48 h观测窗口，后者面向单个滑动窗口。
+时间定位按约 1 h 步长评价，不等同于分钟级起止时间回归。
 
-### 3.2 窗口级节点定位
+### 6.3 事件级空间定位
 
-任务问题：给定一个 active 窗口，在 50 个候选节点中判断真实缺陷节点的排序位置。
+将同一场景内窗口节点分数聚合后计算 Event Top-1、Event Top-3 和 Event Top-5。
 
-输入：active 窗口的模型节点分数 `node_scores(t)`。
+需要区分：
 
-输出：候选节点排序。
+- **true-active 聚合**：使用真实 active 窗口，主要评价空间定位能力；
+- **predicted-active 聚合**：使用预测 active 区间，同时受时间恢复和空间排序影响，属于综合诊断审查。
 
-主要标签：`target_node_idx`。
+第4章空间主结果优先使用 true-active Event Top-K。predicted-active 指标不替代 MRR 和窗口 Top-K。
 
-主要指标：
+## 7. 指标与科学问题对应关系
 
-| 指标 | 含义 | 论文用途 |
+| 科学问题 | 首选指标 | 不宜作为核心指标 |
 |---|---|---|
-| MRR | 真实节点排名倒数的平均值 | 衡量整体排序质量 |
-| Top-1 | 真实节点是否排第 1 | 衡量精确定位能力 |
-| Top-3 | 真实节点是否进入前 3 | 衡量小范围排查能力 |
-| Top-5 | 真实节点是否进入前 5 | 衡量工程候选清单可用性 |
+| 正常扰动是否造成误报 | Normal Window FPR、Scene FPR | Top-5 |
+| 真实缺陷节点是否排在前列 | MRR、Top-1 | Scene F1 |
+| 工程排查清单是否可用 | Top-3、Event Top-3 | 接近饱和的 Top-5 |
+| active 起点是否准确 | Onset error | Active Accuracy |
+| active 区间是否覆盖完整 | Active IoU | 单一窗口 Recall |
+| 模型是否稳定 | 多 seed mean ± std | 单 seed 最优值 |
 
-对应代码：
+## 8. 正式模型验证结构
 
-- `E:\11.16\script2_new\utils\evaluation.py`
+第4章模型有效性由三组证据共同建立：
 
-对应结果：
+1. **分组模型对比**：纯时序、普通图、单层路径与 DeepAttn-L3；
+2. **深度消融**：L1-L4，验证多层聚合与三层饱和点；
+3. **路径先验消融**：Content-only、Distance-only、Full path prior。
 
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_model_comparison_multiseed_summary.csv`
+Distance-only 仅有 seed42，用作机制探针。不得据此形成多 seed 稳定性结论。
 
-### 3.3 场景级活跃期定位
+## 9. 补充分析边界
 
-任务问题：给定一条完整缺陷场景，判断缺陷大致发生在哪段时间。
+- I/E 分组受类型样本构成影响，仅作补充观察；
+- node-holdout 是未见缺陷节点压力测试，不替代 scenario split 主结果；
+- 真实缺陷节点到最近监测节点的 hop 或管网距离用于关联分析，不将距离直接等同于水力可观测性；
+- 单场景时间或空间证据图用于解释诊断过程，不代表全部场景。
 
-输入：同一 `scenario_id` 下按时间排序的窗口级 `p_active(t)`。
+## 10. 当前正式文件
 
-输出：预测 active 时间段。
-
-主要标签：`start_hour` 和 `duration_h`。
-
-推荐正文指标：
-
-| 指标 | 含义 | 推荐程度 |
-|---|---|---|
-| `onset_error_hours_mean` | 预测起点与真实起点的平均小时误差 | 主文 |
-| `onset_accuracy_within_1_stride` | 起点落在真实起点 ±1 个滑动步长内 | 主文 |
-| `onset_accuracy_within_2_strides` | 起点落在真实起点 ±2 个滑动步长内 | 主文或补充 |
-| `onset_accuracy_within_3_strides` | 起点落在真实起点 ±3 个滑动步长内 | 适合粗粒度说明 |
-| `active_interval_iou_mean` | 预测 active 区间与真实区间的 IoU | 主文 |
-
-附表或备答指标：
-
-| 指标 | 含义 |
+| 内容 | 文件 |
 |---|---|
-| `duration_error_hours_mean` | 预测持续时间与真实持续时间误差 |
-| `false_alarm_before_start_rate` | 真实开始前提前报警比例 |
-| `missed_detection_rate` | 未检测到 active 区间的比例 |
-
-注意：场景级活跃期定位不是分钟级起止时间回归。本章按约 1 h 的窗口步长进行粗粒度评价。由于缺陷矩阵中最短持续时间约为 6 h，`±3` 窗口可作为宽松但有工程意义的时间段命中指标。
-
-对应代码：
-
-- `E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\scripts\run_ch4_formal_sensitivity.py`
-
-对应结果：
-
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_AUDIT.md`
-
-### 3.4 场景级空间定位
-
-任务问题：给定一条缺陷场景，最终能否把真实缺陷节点排进候选节点 Top-K。
-
-输入：同一 `scenario_id` 下的窗口级 `node_scores(t)`。
-
-输出：场景级候选节点排序。
-
-主要标签：真实缺陷节点。
-
-主要指标：
-
-| 指标 | 含义 | 说明 |
-|---|---|---|
-| Event Top-1 | 真实节点是否排入事件级 Top-1 | 场景级精确定位 |
-| Event Top-3 | 真实节点是否排入事件级 Top-3 | 小范围排查 |
-| Event Top-5 | 真实节点是否排入事件级 Top-5 | 工程候选清单 |
-
-需要区分两种口径：
-
-| 口径 | 含义 | 论文位置 |
-|---|---|---|
-| true active 聚合 | 使用真实 active 窗口聚合节点分数 | 空间定位主结果 |
-| predicted active 聚合 | 使用预测 active 时间段聚合节点分数 | 综合诊断审查 |
-
-true active 聚合主要衡量空间定位能力；predicted active 聚合同时受时间段选择和节点分数融合影响，更严格但不适合作为唯一主指标。
-
-对应代码：
-
-- true active 聚合：`E:\11.16\script2_new\utils\evaluation.py`
-- predicted active 聚合：`E:\11.16\script2_new\scripts\evaluate_scene_timeline_diagnosis.py`
-
-对应结果：
-
-- true active 聚合：`E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_main_model_multiseed.csv`
-- predicted active 聚合：`E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_window_length\CH4_FORMAL_WINDOW_LENGTH_SUMMARY.csv`
-
-### 3.5 场景级综合诊断
-
-任务问题：是否能够同时给出较合理的缺陷时间段和候选节点排序。
-
-输入：预测 active 时间段和该时间段内聚合的节点分数。
-
-输出：缺陷大致时间段 + 候选节点 Top-K。
-
-指标示例：
-
-| 指标 | 含义 | 论文用途 |
-|---|---|---|
-| `onset_within_1_stride_and_node_top3` | 起点在 ±1 滑动步长内且节点进入 Top-3 | 严格综合审查 |
-| `onset_within_2_strides_and_node_top5` | 起点在 ±2 滑动步长内且节点进入 Top-5 | 综合诊断审查 |
-| `onset_within_3_strides_and_node_top5` | 起点在 ±3 滑动步长内且节点进入 Top-5 | 粗粒度综合诊断 |
-
-这类指标更接近完整工程流程，但会同时受到 active 段预测、窗口长度、节点分数聚合方式影响。因此正文可作为补充说明，不建议替代主实验中的 MRR、Top-K 和 Event Top-K。
-
-### 3.6 I/E 分组分析
-
-任务问题：I 类和 E 类缺陷的定位难度是否存在差异。
-
-输入：测试集中真实 `defect_type` 与定位结果。
-
-输出：I/E 两组的 MRR、Top-K。
-
-注意：该任务不是 I/E 自动分类，而是按真实类型进行分组统计。
-
-对应结果：
-
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\formal_ie_group\CH4_FORMAL_IE_GROUP_SUMMARY.csv`
-- `E:\11.16\thesis_writing_repo\figures\ch4\source_data\CH4-F10a_formal_ie_type_group_multiseed_summary.csv`
-
-### 3.7 泛化边界与可观测性分析
-
-任务问题：模型在哪些空间条件下表现更好，在哪些条件下容易下降。
-
-分析维度：
-
-| 分析 | 含义 | 结果用途 |
-|---|---|---|
-| `scenario split` vs `node_holdout` | 新场景泛化与未见节点泛化对比 | 说明泛化边界 |
-| direct / near / far | 候选节点与监测节点拓扑距离分层 | 说明可观测性影响 |
-| candidate mechanism | V/S/C/D 集合关系 | 说明候选空间设计 |
-
-对应结果：
-
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_nodehold_observability_summary.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\chapter4_candidate_observability_counts.csv`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_split_vs_nodehold.png`
-- `E:\11.16\script2_new\chapter4_diagnosis_model\outputs\thesis_results\figures\fig_ch4_observability_analysis.png`
-
-## 4. 正文和 PPT 推荐呈现顺序
-
-正文和 PPT 的顺序应与任务链一致，但结果呈现要突出主贡献：
-
-1. 先讲连续场景如何切成滑动窗口。
-2. 再讲模型如何输出窗口级 `p_active(t)` 和 `node_scores(t)`。
-3. 然后讲窗口级 active 与节点定位结果，证明窗口证据有效。
-4. 接着讲场景级 Event Top-K，证明完整场景可以形成可靠候选节点清单。
-5. 再讲窗口长度实验，说明时间段定位与空间定位存在尺度权衡。
-6. 最后讲特征组合与损失权重分析、I/E 分组、node_holdout 和可观测性分析。
-
-这样安排的好处是：技术流程符合“先时间证据、再空间定位”的逻辑，主实验又不会被 6h 窗口的时间边界误差喧宾夺主。
-
-## 5. 第5章应固定的第4章版本
-
-第5章布局优化需要固定第4章空间诊断基线，建议采用：
-
-| 项目 | 固定设置 |
-|---|---|
-| 数据 | 无缺陷正常工况层 + IE420 time-gated缺陷层（记录名：IE420 + normal20） |
-| 图空间 | `V=128` |
-| 监测布局 | `degree N25` 作为基线 |
-| 候选定位空间 | `C=50` |
-| 模型 | `hydraulic_inverse_deepattn` |
-| 输入协议 | full-graph sparse-observation |
-| 窗口 | `sequence_length=36`，约 6 h |
-| 步长 | `window_stride=6`，约 1 h |
-| 主指标 | Active F1、Normal Window FPR、Scene F1、MRR、Top-1、Top-3、Event Top-K |
-| 支撑指标 | Scene Recall、Scene FPR、I/E 分组、可观测性分层 |
-
-2h/3h 窗口实验可作为第4章时间段定位补充分析，不建议作为第5章布局优化的主基线。
+| 第4章正文 | `chapters/ch4_model_diagnosis.md` |
+| 第4章证据矩阵 | `chapters/CH4_RESULTS_EVIDENCE_MATRIX_FINAL.md` |
+| 第4/5章结果逻辑 | `chapters/CH4_CH5_FINAL_STORYLINE_WITH_RESULTS.md` |
+| 第4章图件索引 | `figures/ch4/generated_results/CH4_OFFICIAL_FIGURE_INDEX.md` |
+| 模型消融汇总 | `figures/ch4/source_data/CH4-F11_method_ablation_summary.csv` |

@@ -1,0 +1,16 @@
+candidate_node,Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided,min_hop,max_hop,mean_hop,method_gap,max_methods,min_methods
+VP0232532,15,15,2,0,2,2,0,15,6.0,15,"Degree,Betweenness",Two-stage v1
+MH0201629,15,15,1,0,2,2,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1
+MH0201710,15,15,0,2,0,0,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided"
+HS2003111,15,15,0,0,0,1,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback"
+MH0200661,15,15,1,1,1,1,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided"
+HS1314237,15,15,2,2,2,15,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback"
+HS1313618,1,4,0,1,4,9,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs
+HS1316814,9,7,1,1,4,3,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1"
+HS1306471,7,5,2,2,2,0,0,7,3.0,7,Degree,Embedding-Guided
+HS1313471,1,3,1,1,1,7,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback"
+HS1313597,0,2,2,0,2,6,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1"
+HS2003085,6,1,1,1,1,0,0,6,1.6666666666666667,6,Degree,Embedding-Guided
+HS1330842,6,1,0,0,1,1,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1"
+HS1311288,2,4,1,0,3,5,0,5,2.5,5,Embedding-Guided,Two-stage v1
+HS1316415,5,3,2,0,3,1,0,5,2.3333333333333335,5,Degree,Two-stage v1

@@ -1,0 +1,2 @@
+﻿dataset_type,formal_defect_scenario_count,cases_per_type_duration_per_stratum,strata,value_definition,residual_columns,scenario_averaging,draw07_reference
+ie420_plus_normal20,420,8,low;mid;high,hydraulic_response_index_q90 = q90 hydraulic residual energy / node-wise normal20 q95,depth_residual;total_outflow_residual,none; each raster row is one selected scenario,07_CH3_all_scenario_event_aligned_response

@@ -1,0 +1,7 @@
+metric,family,score,color
+Active F1,Window detection,0.979,#59A14F
+Scene F1,Scene alarm,0.9917,#59A14F
+MRR,Spatial ranking,0.8457,#4C78A8
+Top-1,Spatial ranking,0.7728,#F58518
+Top-3,Spatial ranking,0.8973,#54A24B
+Top-5,Spatial ranking,0.9463,#B279A2

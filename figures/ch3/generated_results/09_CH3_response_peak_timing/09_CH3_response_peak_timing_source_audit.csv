@@ -1,0 +1,2 @@
+﻿dataset_type,formal_defect_scenario_count,residual_columns,peak_definition,time_window,scenario_averaging
+ie420_plus_normal20,420,depth_residual;total_outflow_residual,max active-window hydraulic_response_index_q90 across topology bands and relative time,0-14 h after defect onset,none; one peak record per formal defect scenario

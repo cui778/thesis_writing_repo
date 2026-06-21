@@ -1,0 +1,2 @@
+﻿selection_note,selected_defect_scenario_count,cases_per_type_duration,random_selection_seed,residual_columns,value_col,value_definition
+Random balanced formal scenarios: 8 cases per defect type x duration group.,64,8,42,depth_residual;total_outflow_residual,exceedance_rate,fraction of nodes with hydraulic residual energy above node-wise normal20 q95

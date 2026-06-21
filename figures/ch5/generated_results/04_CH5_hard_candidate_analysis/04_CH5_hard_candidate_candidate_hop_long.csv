@@ -1,0 +1,301 @@
+candidate_node,min_hop,max_hop,mean_hop,method_gap,max_methods,min_methods,method,hop
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Degree,15
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Degree,15
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Degree,15
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Degree,15
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Degree,15
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Degree,15
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Degree,1
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Degree,9
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Degree,7
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Degree,1
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Degree,0
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Degree,6
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Degree,6
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Degree,2
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Degree,5
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Degree,1
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Degree,5
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Degree,5
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Degree,2
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Degree,4
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Degree,1
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Degree,0
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Degree,0
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Degree,1
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Degree,2
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Degree,3
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Degree,3
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Degree,1
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Degree,0
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Degree,2
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Degree,0
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Degree,3
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Degree,2
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Degree,2
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Degree,2
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Degree,1
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Degree,1
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Degree,0
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Degree,1
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Degree,0
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Degree,0
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Degree,1
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Degree,1
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Degree,1
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Degree,1
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Degree,1
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Degree,0
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Degree,0
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Degree,0
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Degree,0
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Betweenness,15
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Betweenness,15
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Betweenness,15
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,15
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Betweenness,15
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,15
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Betweenness,4
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Betweenness,7
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Betweenness,5
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,3
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Betweenness,2
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Betweenness,1
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Betweenness,1
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Betweenness,4
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Betweenness,3
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Betweenness,3
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Betweenness,5
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Betweenness,5
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,4
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Betweenness,4
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Betweenness,0
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Betweenness,2
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,2
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Betweenness,3
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,2
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Betweenness,3
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Betweenness,3
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Betweenness,2
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Betweenness,2
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,3
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,0
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Betweenness,3
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Betweenness,3
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Betweenness,2
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Betweenness,1
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Betweenness,1
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Betweenness,0
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Betweenness,0
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Betweenness,0
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,1
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Betweenness,0
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Betweenness,1
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Betweenness,1
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Betweenness,0
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Betweenness,1
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Betweenness,1
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Betweenness,0
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Betweenness,0
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Betweenness,0
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Betweenness,0
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Cand-Obs,2
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Cand-Obs,1
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Cand-Obs,0
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,0
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Cand-Obs,1
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,2
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Cand-Obs,0
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Cand-Obs,1
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Cand-Obs,2
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,1
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Cand-Obs,2
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Cand-Obs,1
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Cand-Obs,0
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Cand-Obs,1
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Cand-Obs,2
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Cand-Obs,0
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Cand-Obs,3
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Cand-Obs,1
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,2
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Cand-Obs,2
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Cand-Obs,1
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Cand-Obs,1
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,0
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Cand-Obs,2
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,1
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Cand-Obs,1
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Cand-Obs,0
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Cand-Obs,2
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Cand-Obs,1
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,0
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,0
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Cand-Obs,1
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Cand-Obs,1
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Cand-Obs,0
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Cand-Obs,0
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Cand-Obs,1
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Cand-Obs,1
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Cand-Obs,1
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Cand-Obs,1
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,0
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Cand-Obs,2
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Cand-Obs,1
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Cand-Obs,1
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Cand-Obs,1
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Cand-Obs,1
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Cand-Obs,0
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Cand-Obs,1
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Cand-Obs,1
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Cand-Obs,0
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Cand-Obs,0
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Two-stage v1,0
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Two-stage v1,0
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Two-stage v1,2
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,0
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Two-stage v1,1
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,2
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Two-stage v1,1
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Two-stage v1,1
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Two-stage v1,2
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,1
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Two-stage v1,0
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Two-stage v1,1
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Two-stage v1,0
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Two-stage v1,0
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Two-stage v1,0
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Two-stage v1,1
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Two-stage v1,1
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Two-stage v1,2
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,2
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Two-stage v1,0
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Two-stage v1,1
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Two-stage v1,4
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,0
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Two-stage v1,2
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,1
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Two-stage v1,0
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Two-stage v1,0
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Two-stage v1,0
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Two-stage v1,1
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,0
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,0
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Two-stage v1,1
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Two-stage v1,1
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Two-stage v1,1
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Two-stage v1,2
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Two-stage v1,2
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Two-stage v1,1
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Two-stage v1,2
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Two-stage v1,2
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,0
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Two-stage v1,0
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Two-stage v1,2
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Two-stage v1,1
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Two-stage v1,1
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Two-stage v1,0
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Two-stage v1,1
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Two-stage v1,1
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Two-stage v1,1
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Two-stage v1,1
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Two-stage v1,0
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Node-Feedback,2
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Node-Feedback,2
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Node-Feedback,0
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,0
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Node-Feedback,1
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,2
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Node-Feedback,4
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Node-Feedback,4
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Node-Feedback,2
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,1
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Node-Feedback,2
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Node-Feedback,1
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Node-Feedback,1
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Node-Feedback,3
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Node-Feedback,3
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Node-Feedback,3
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Node-Feedback,5
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Node-Feedback,1
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,2
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Node-Feedback,4
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Node-Feedback,1
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Node-Feedback,0
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,0
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Node-Feedback,2
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,1
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Node-Feedback,1
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Node-Feedback,3
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Node-Feedback,3
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Node-Feedback,1
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,0
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,0
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Node-Feedback,3
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Node-Feedback,3
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Node-Feedback,2
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Node-Feedback,1
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Node-Feedback,1
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Node-Feedback,1
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Node-Feedback,0
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Node-Feedback,1
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,0
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Node-Feedback,0
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Node-Feedback,1
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Node-Feedback,1
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Node-Feedback,1
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Node-Feedback,1
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Node-Feedback,1
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Node-Feedback,0
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Node-Feedback,0
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Node-Feedback,0
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Node-Feedback,0
+VP0232532,0,15,6.0,15,"Degree,Betweenness",Two-stage v1,Embedding-Guided,2
+MH0201629,0,15,5.833333333333333,15,"Degree,Betweenness",Two-stage v1,Embedding-Guided,2
+MH0201710,0,15,5.333333333333333,15,"Degree,Betweenness","Cand-Obs,Node-Feedback,Embedding-Guided",Embedding-Guided,0
+HS2003111,0,15,5.166666666666667,15,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,1
+MH0200661,1,15,5.666666666666667,14,"Degree,Betweenness","Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Embedding-Guided,1
+HS1314237,2,15,8.5,13,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,15
+HS1313618,0,9,3.1666666666666665,9,Embedding-Guided,Cand-Obs,Embedding-Guided,9
+HS1316814,1,9,4.166666666666667,8,Degree,"Cand-Obs,Two-stage v1",Embedding-Guided,3
+HS1306471,0,7,3.0,7,Degree,Embedding-Guided,Embedding-Guided,0
+HS1313471,1,7,2.3333333333333335,6,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,7
+HS1313597,0,6,2.0,6,Embedding-Guided,"Degree,Two-stage v1",Embedding-Guided,6
+HS2003085,0,6,1.6666666666666667,6,Degree,Embedding-Guided,Embedding-Guided,0
+HS1330842,0,6,1.5,6,Degree,"Cand-Obs,Two-stage v1",Embedding-Guided,1
+HS1311288,0,5,2.5,5,Embedding-Guided,Two-stage v1,Embedding-Guided,5
+HS1316415,0,5,2.3333333333333335,5,Degree,Two-stage v1,Embedding-Guided,1
+HS1313925,0,5,2.1666666666666665,5,Embedding-Guided,Cand-Obs,Embedding-Guided,5
+MH0258475,1,5,4.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Embedding-Guided,5
+HS1344902,1,5,3.1666666666666665,4,"Degree,Betweenness,Embedding-Guided","Cand-Obs,Node-Feedback",Embedding-Guided,5
+HS1344920,2,6,3.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,6
+MH0242782,0,4,3.0,4,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Two-stage v1,Embedding-Guided,4
+MH0101924,0,4,1.3333333333333333,4,Embedding-Guided,Betweenness,Embedding-Guided,4
+HS1313253,0,4,1.3333333333333333,4,Two-stage v1,"Degree,Node-Feedback",Embedding-Guided,1
+HS1313298,0,4,1.0,4,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,4
+HS1311473,1,4,2.3333333333333335,3,Embedding-Guided,Degree,Embedding-Guided,4
+HS1344261,1,4,1.8333333333333333,3,Embedding-Guided,"Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,4
+HS1316643,0,3,1.8333333333333333,3,"Degree,Betweenness,Embedding-Guided",Two-stage v1,Embedding-Guided,3
+HS1311339,0,3,1.6666666666666667,3,"Degree,Betweenness,Node-Feedback","Cand-Obs,Two-stage v1",Embedding-Guided,1
+HS2003015,0,3,1.6666666666666667,3,Node-Feedback,Two-stage v1,Embedding-Guided,2
+HS1313001,0,3,1.3333333333333333,3,Embedding-Guided,Degree,Embedding-Guided,3
+HS1316721,0,3,1.0,3,Betweenness,"Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,1
+HS1313402,0,3,0.5,3,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,3
+HS1344263,1,3,2.3333333333333335,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided","Cand-Obs,Two-stage v1",Embedding-Guided,3
+HS1314505,1,3,1.8333333333333333,2,"Betweenness,Node-Feedback","Cand-Obs,Two-stage v1,Embedding-Guided",Embedding-Guided,1
+HS1316585,0,2,1.5,2,"Degree,Betweenness,Node-Feedback,Embedding-Guided",Cand-Obs,Embedding-Guided,2
+HS1316202,0,2,1.1666666666666667,2,"Degree,Two-stage v1",Cand-Obs,Embedding-Guided,1
+HS1313140,0,2,1.0,2,Two-stage v1,Embedding-Guided,Embedding-Guided,0
+HS1308302,0,2,1.0,2,Embedding-Guided,Betweenness,Embedding-Guided,2
+HS1313205,0,2,0.8333333333333334,2,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Embedding-Guided,2
+HS1324403,0,2,0.8333333333333334,2,Two-stage v1,"Betweenness,Embedding-Guided",Embedding-Guided,0
+HS1313025,0,2,0.5,2,Embedding-Guided,"Degree,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,2
+HS1316563,0,2,0.3333333333333333,2,Cand-Obs,"Degree,Betweenness,Two-stage v1,Node-Feedback,Embedding-Guided",Embedding-Guided,0
+HS1306554,1,2,1.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Embedding-Guided,2
+HS1308259,1,2,1.1666666666666667,1,Embedding-Guided,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback",Embedding-Guided,2
+HS2003046,0,1,0.6666666666666666,1,"Degree,Cand-Obs,Two-stage v1,Node-Feedback","Betweenness,Embedding-Guided",Embedding-Guided,0
+HS1316417,0,1,0.6666666666666666,1,"Degree,Betweenness,Cand-Obs,Node-Feedback","Two-stage v1,Embedding-Guided",Embedding-Guided,0
+HS1314477,0,1,0.6666666666666666,1,"Degree,Betweenness,Two-stage v1,Node-Feedback","Cand-Obs,Embedding-Guided",Embedding-Guided,0
+HS1306571,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Embedding-Guided,1
+HS1306904,0,1,0.5,1,"Cand-Obs,Two-stage v1,Embedding-Guided","Degree,Betweenness,Node-Feedback",Embedding-Guided,1
+HS1313835,0,1,0.3333333333333333,1,"Two-stage v1,Embedding-Guided","Degree,Betweenness,Cand-Obs,Node-Feedback",Embedding-Guided,1
+HS1306601,0,0,0.0,0,"Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided","Degree,Betweenness,Cand-Obs,Two-stage v1,Node-Feedback,Embedding-Guided",Embedding-Guided,0

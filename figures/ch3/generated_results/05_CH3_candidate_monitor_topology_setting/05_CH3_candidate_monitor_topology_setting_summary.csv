@@ -1,0 +1,7 @@
+﻿item,value
+all_nodes,128
+candidate_nodes,50
+monitor_nodes,25
+overlap_nodes,12
+candidate_strategy,exclude_inlets_outfalls_then_fill_by_combined_centrality_and_pipe_attributes
+monitor_strategy,degree

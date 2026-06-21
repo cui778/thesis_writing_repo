@@ -1,0 +1,2 @@
+﻿case_id,figure_prefix,matrix_flow_score,node_id,I_scenario,E_scenario,I_start_hour,I_duration_h,E_start_hour,E_duration_h,I_flow,E_flow,rank_metric,rank_label,outside_ratio,defect_abs_to_normal_q95,preferred_scenario_id,note
+case01,02a,84.55510000000001,HS1306571,136,253,8.0,6.0,0.0,18.0,64.5455,-20.0096,depth_residual,Depth residual,0.7397475218842167,1.359868809330287,136,

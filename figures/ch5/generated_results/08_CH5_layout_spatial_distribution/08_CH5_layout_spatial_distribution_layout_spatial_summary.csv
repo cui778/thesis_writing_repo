@@ -1,0 +1,27 @@
+﻿method,budget,n_monitors,overlap_with_defect_nodes,layout_file,direct,near,far,mean_hop,max_hop
+Degree,5,5,3,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\monitor_nodes_degree_N5.json,3,13,34,5.78,15.0
+Degree,10,10,6,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\monitor_nodes_degree_N10.json,6,17,27,5.1,15.0
+Degree,15,15,8,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\monitor_nodes_degree_N15.json,8,19,23,3.9,15.0
+Degree,20,20,12,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\monitor_nodes_degree_N20.json,12,18,20,3.64,15.0
+Degree,25,25,12,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\degree\monitor_nodes_degree_N25.json,12,21,17,3.48,15.0
+Betweenness,5,5,3,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\betweenness\monitor_nodes_betweenness_N5.json,3,10,37,8.12,15.0
+Betweenness,10,10,5,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\betweenness\monitor_nodes_betweenness_N10.json,5,12,33,7.38,15.0
+Betweenness,15,15,7,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\betweenness\monitor_nodes_betweenness_N15.json,7,13,30,4.88,15.0
+Betweenness,20,20,10,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\betweenness\monitor_nodes_betweenness_N20.json,10,14,26,3.84,15.0
+Betweenness,25,25,11,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\betweenness\monitor_nodes_betweenness_N25.json,11,16,23,3.56,15.0
+Cand-Obs,5,5,3,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\monitor_nodes_candidate_observability_N5.json,3,20,27,5.38,15.0
+Cand-Obs,10,10,6,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\monitor_nodes_candidate_observability_N10.json,6,30,14,2.36,9.0
+Cand-Obs,15,15,9,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\monitor_nodes_candidate_observability_N15.json,9,33,8,1.52,5.0
+Cand-Obs,20,20,12,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\monitor_nodes_candidate_observability_N20.json,12,35,3,1.2,3.0
+Cand-Obs,25,25,15,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\candidate_observability\monitor_nodes_candidate_observability_N25.json,15,34,1,0.94,3.0
+Two-stage v1,5,5,5,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\monitor_nodes_two_stage_balanced_layout_v1_N5.json,5,13,32,5.42,15.0
+Two-stage v1,10,10,8,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\monitor_nodes_two_stage_balanced_layout_v1_N10.json,8,21,21,3.08,15.0
+Two-stage v1,15,15,11,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\monitor_nodes_two_stage_balanced_layout_v1_N15.json,11,28,11,1.88,10.0
+Two-stage v1,20,20,15,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\monitor_nodes_two_stage_balanced_layout_v1_N20.json,15,28,7,1.36,6.0
+Two-stage v1,25,25,18,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\two_stage_balanced_layout_v1\monitor_nodes_two_stage_balanced_layout_v1_N25.json,18,31,1,0.92,4.0
+Node-Feedback,25,25,13,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\learnable_layout_network_v0_scenario\monitor_nodes_learnable_layout_network_v0_scenario_N25.json,13,26,11,1.44,5.0
+Embedding-Guided,5,5,3,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean_fixed\monitor_nodes_embedding_guided_clean_N5.json,3,10,37,8.66,15.0
+Embedding-Guided,10,10,5,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean_fixed\monitor_nodes_embedding_guided_clean_N10.json,5,17,28,5.44,15.0
+Embedding-Guided,15,15,6,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean_fixed\monitor_nodes_embedding_guided_clean_N15.json,6,18,26,4.86,15.0
+Embedding-Guided,20,20,6,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean_fixed\monitor_nodes_embedding_guided_clean_N20.json,6,20,24,3.36,15.0
+Embedding-Guided,25,25,10,E:\11.16\script2_new\chapter5_layout_optimization\outputs\layouts\embedding_guided_clean_fixed\monitor_nodes_embedding_guided_clean_N25.json,10,21,19,2.56,15.0

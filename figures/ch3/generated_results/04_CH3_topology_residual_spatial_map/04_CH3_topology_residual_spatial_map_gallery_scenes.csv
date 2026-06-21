@@ -1,0 +1,4 @@
+﻿defect_id,defect_type,node_id,link_id,intensity_pct,start_hour,duration_h,flow,BODf,NH4,DO,baseline_flow,case_id,figure_prefix,source_02_prefix,outside_ratio,rank_metric
+136,I,HS1306571,,60,8,6,64.5455,0.0,0.0,0.0,107.5758,case01,04a,02a,0.7397475218842167,depth_residual
+98,I,HS1306601,,60,14,6,86.3997,0.0,0.0,0.0,143.9995,case02,04b,02b,0.4760446593667596,depth_residual
+172,I,HS1306904,,60,8,6,114.7473,0.0,0.0,0.0,191.2455,case03,04c,02c,,manual

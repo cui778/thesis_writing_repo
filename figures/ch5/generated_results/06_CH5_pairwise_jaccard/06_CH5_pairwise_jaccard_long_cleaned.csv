@@ -1,0 +1,37 @@
+method_a,method_b,jaccard
+Degree,Degree,1.0
+Degree,Betweenness,0.3888888888888889
+Degree,Cand-Obs,0.1904761904761904
+Degree,Two-stage v1,0.25
+Degree,Node-Feedback,0.5625
+Degree,Embedding-Guided,0.0416666666666666
+Betweenness,Degree,0.3888888888888889
+Betweenness,Betweenness,1.0
+Betweenness,Cand-Obs,0.1111111111111111
+Betweenness,Two-stage v1,0.0869565217391304
+Betweenness,Node-Feedback,0.4705882352941176
+Betweenness,Embedding-Guided,0.1363636363636363
+Cand-Obs,Degree,0.1904761904761904
+Cand-Obs,Betweenness,0.1111111111111111
+Cand-Obs,Cand-Obs,1.0
+Cand-Obs,Two-stage v1,0.3157894736842105
+Cand-Obs,Node-Feedback,0.3513513513513513
+Cand-Obs,Embedding-Guided,0.0638297872340425
+Two-stage v1,Degree,0.25
+Two-stage v1,Betweenness,0.0869565217391304
+Two-stage v1,Cand-Obs,0.3157894736842105
+Two-stage v1,Two-stage v1,1.0
+Two-stage v1,Node-Feedback,0.25
+Two-stage v1,Embedding-Guided,0.0638297872340425
+Node-Feedback,Degree,0.5625
+Node-Feedback,Betweenness,0.4705882352941176
+Node-Feedback,Cand-Obs,0.3513513513513513
+Node-Feedback,Two-stage v1,0.25
+Node-Feedback,Node-Feedback,1.0
+Node-Feedback,Embedding-Guided,0.1111111111111111
+Embedding-Guided,Degree,0.0416666666666666
+Embedding-Guided,Betweenness,0.1363636363636363
+Embedding-Guided,Cand-Obs,0.0638297872340425
+Embedding-Guided,Two-stage v1,0.0638297872340425
+Embedding-Guided,Node-Feedback,0.1111111111111111
+Embedding-Guided,Embedding-Guided,1.0
