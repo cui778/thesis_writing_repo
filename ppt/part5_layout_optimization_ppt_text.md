@@ -3,9 +3,10 @@
 > **历史 PPT 草稿，暂勿直接用于正式答辩。**
 >
 > 本文件仍保留早期 `Surrogate-Search` 叙事和旧协议数值，便于追溯思路演进。
-> 当前正式口径请读取 `chapters/ch5_layout_optimization.md`、`notes/MASTER_PROTOCOL.md`、
-> `figures/ch5/source_data/CH5-EXPT_fixed_protocol_N25_main_table.csv` 和
-> `figures/ch5/source_data/CH5-budget_sweep_seed42.csv`。后续应依据上述文件重构正式 PPT。
+> 当前正式口径请读取 `chapters/ch5_layout_optimization.md`、
+> `chapters/CH5_RESULTS_EVIDENCE_MATRIX_FINAL.md`、
+> `figures/ch5/generated_results/CH5_OFFICIAL_FIGURE_INDEX.md` 和
+> `figures/ch5/source_data/CH5-budget_sweep_formal_seed42.csv`。后续应依据上述文件重构正式 PPT。
 
 > 用途：中期正式答辩第五章研究进展汇报。  
 > 展示重点：固定第4章主诊断协议，只改变监测节点集合 `S`，集中展示规则布局、外部诊断反馈学习、诊断模型节点诊断嵌入多样性、分组性能、边界分析和后续实验顺序。  

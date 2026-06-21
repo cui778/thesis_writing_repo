@@ -167,8 +167,10 @@ thesis_writing_repo/figures/
 
 - 正式协议冻结：`script2_new/chapter3_data_generation/plans/CH3_PROTOCOL_FREEZE.md`
 - 正式协议冻结：`script2_new/chapter4_diagnosis_model/plans/CH4_PROTOCOL_FREEZE.md`
-- 证据地图：`thesis_writing_repo/notes/evidence_map.md`
-- 小节实验映射：`thesis_writing_repo/notes/section_experiment_map.md`
-- 图件目录（Ch3）：`thesis_writing_repo/figures/ch3/figure_index.csv`
-- 图件目录（Ch4）：`thesis_writing_repo/figures/ch4/figure_index.csv`
-- PPT 插图索引（Ch4）：`thesis_writing_repo/figures/ch4/ppt_insert_index.md`
+- 第4章结果证据矩阵：`thesis_writing_repo/chapters/CH4_RESULTS_EVIDENCE_MATRIX_FINAL.md`
+- 第5章结果证据矩阵：`thesis_writing_repo/chapters/CH5_RESULTS_EVIDENCE_MATRIX_FINAL.md`
+- 第4、5章结果逻辑：`thesis_writing_repo/chapters/CH4_CH5_FINAL_STORYLINE_WITH_RESULTS.md`
+- 网页端写作入口：`thesis_writing_repo/WEB_WRITING_START_HERE.md`
+- 正式图件索引（Ch3）：`thesis_writing_repo/figures/ch3/generated_results/CH3_OFFICIAL_FIGURE_INDEX.md`
+- 正式图件索引（Ch4）：`thesis_writing_repo/figures/ch4/generated_results/CH4_OFFICIAL_FIGURE_INDEX.md`
+- 正式图件索引（Ch5）：`thesis_writing_repo/figures/ch5/generated_results/CH5_OFFICIAL_FIGURE_INDEX.md`

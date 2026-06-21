@@ -21,24 +21,22 @@
 
 每次写作前先打开：
 
-- [章节阅读路线图](notes/chapter_reading_routes.md)
-- [小节级实验映射表](notes/section_experiment_map.md)
-- [证据地图](notes/evidence_map.md)
-- [小节规划提示词](prompts/plan_one_section.md)
-- [小节写作提示词](prompts/write_one_section.md)
-- [事实审查提示词](prompts/review_one_section.md)
+- [网页端论文写作入口](WEB_WRITING_START_HERE.md)
+- [第4章结果证据矩阵](chapters/CH4_RESULTS_EVIDENCE_MATRIX_FINAL.md)
+- [第5章结果证据矩阵](chapters/CH5_RESULTS_EVIDENCE_MATRIX_FINAL.md)
+- [第4、5章结果逻辑](chapters/CH4_CH5_FINAL_STORYLINE_WITH_RESULTS.md)
+- [正式数据源政策](figures/DATA_SOURCE_POLICY.md)
 
 固定顺序：
 
 ```text
-先读路线图
--> 找到当前小节的实验映射
--> 让 AI 规划当前小节
--> 读取计划中列出的证据
--> 更新证据地图
--> 写正文
--> 审查事实
--> 提交版本
+确认章级主线与正式口径
+-> 建立当前二级节写作包
+-> 读取本节对应表格、图件和代码证据
+-> 按三级节逐段撰写
+-> 单节事实与结论边界审查
+-> 全章跨节一致性检查
+-> 最终语言润色
 ```
 
 ## 章节入口
@@ -55,9 +53,9 @@
 每完成一个小节后检查：
 
 - 本节是否只回答一个核心问题？
-- 本节是否先参考了 [章节阅读路线图](notes/chapter_reading_routes.md)？
-- 本节是否先参考了 [小节级实验映射表](notes/section_experiment_map.md)？
-- 数据和结论是否已记录到 [证据地图](notes/evidence_map.md)？
+- 本节是否遵循 [网页端论文写作入口](WEB_WRITING_START_HERE.md) 中的正式口径？
+- 每个数值是否能追溯到正式结果表或 cleaned CSV？
+- 正文引用的图件是否属于对应章节正式图件索引？
 - 是否误用了旧实验口径？
 - 是否把 50 个候选节点定位误写成 128 节点自由定位？
 - 是否把 I/E 缺陷误写成 P 类水质污染源定位？
